@@ -24,7 +24,7 @@ use your entire disk during the install.
 
 ### Automatic installation
 
-Clone the project: `git clone https://github.com/eth-educators/eth-docker.git && cd eth-docker`
+Clone the project: `git clone https://github.com/ethstaker/eth-docker.git && cd eth-docker`
 
 Run `./ethd install` and follow prompts
 
@@ -55,7 +55,7 @@ Eth Docker has been tested on Debian 11 "Bullseye" and Debian 12 "Bookworm".
 
 ### Automatic installation
 
-Clone the project: `git clone https://github.com/eth-educators/eth-docker.git && cd eth-docker`
+Clone the project: `git clone https://github.com/ethstaker/eth-docker.git && cd eth-docker`
 
 Run `./ethd install` and follow prompts
 

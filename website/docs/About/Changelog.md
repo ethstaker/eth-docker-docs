@@ -13,8 +13,8 @@ modifications. If you want to reset the source or binary build targets in `.env`
 instead.
 * `./ethd up` - use the new client version(s)
 
-> On 1/27/2022, Eth Docker's repository name changed. Everything should work as it did.
-> If you do wish to manually update your local reference, run `git remote set-url origin https://github.com/eth-educators/eth-docker.git`
+> On 6/21/2025, Eth Docker's repository name changed. Everything should work as it did.
+> If you do wish to manually update your local reference, run `git remote set-url origin https://github.com/ethstaker/eth-docker.git`
 
 
 ## v2.15.3.0 2025-05-13

@@ -179,7 +179,7 @@ Start the existing client stack with `./ethd up`, it will start using the new po
 
 ### 2. Create a new client stack
 
-You'll be running a second copy of Eth Docker in its own directory. For example, if the new directory is going to be `~/eth-staker`: `cd ~ && git clone https://github.com/eth-educators/eth-docker.git eth-staker && cd eth-staker` .
+You'll be running a second copy of Eth Docker in its own directory. For example, if the new directory is going to be `~/eth-staker`: `cd ~ && git clone https://github.com/ethstaker/eth-docker.git eth-staker && cd eth-staker` .
 
 Configure the new stack. You can choose the same or a different consensus client, and a different execution client, compared to your existing client stack.
 Make sure to choose "checkpoint sync" so the consensus client can sync in minutes. `./ethd config` followed by `./ethd up`.
@@ -207,7 +207,7 @@ If you are using systemd with guides from Somer Esat, Coincashew or Metanull, an
 
 ### 1. Create a new Eth Docker client stack
 
-Clone Eth Docker, for example into `~/eth-docker`: `cd ~ && git clone https://github.com/eth-educators/eth-docker.git && cd eth-docker` .
+Clone Eth Docker, for example into `~/eth-docker`: `cd ~ && git clone https://github.com/ethstaker/eth-docker.git && cd eth-docker` .
 
 Install prerequisites: `./ethd install`
 

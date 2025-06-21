@@ -27,7 +27,7 @@ Eth Docker needs to be installed while logged into a user account other than `ro
 
 Download Eth Docker
 
-`cd ~ && git clone https://github.com/eth-educators/eth-docker.git && cd eth-docker`
+`cd ~ && git clone https://github.com/ethstaker/eth-docker.git && cd eth-docker`
 
 Install pre-requisites such as Docker
 

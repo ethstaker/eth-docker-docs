@@ -38,10 +38,10 @@ solely for your convenience.
 
 ```
 cd ~
-git clone https://github.com/eth-educators/eth-docker vero
-git clone https://github.com/eth-educators/eth-docker eth-tb
-git clone https://github.com/eth-educators/eth-docker eth-nr
-git clone https://github.com/eth-educators/eth-docker eth-le
+git clone https://github.com/ethstaker/eth-docker vero
+git clone https://github.com/ethstaker/eth-docker eth-tb
+git clone https://github.com/ethstaker/eth-docker eth-nr
+git clone https://github.com/ethstaker/eth-docker eth-le
 ```
 
 ### Configure first through third client pair
