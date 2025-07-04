@@ -16,6 +16,36 @@ instead.
 > On 6/21/2025, Eth Docker's repository name changed. Everything should work as it did.
 > If you do wish to manually update your local reference, run `git remote set-url origin https://github.com/ethstaker/eth-docker.git`
 
+## v2.16.0.0 2025-07-04
+
+*This release is recommended*
+
+The headline feature is execution layer history expiry, so an Ethereum node fits into roughly 1 TiB.
+
+**Breaking changes**
+- Require Besu `25.7.0`, use promoted Besu pruning parameters without `-X`
+
+Changes
+- Support pre-merge history expiry for all execution layer clients: `./ethd prune-history`
+- Geth archive node fresh sync uses path-based state scheme
+- Enable Vero keymanager API
+- `./ethd install` can apply host-level optimizations
+- `ext-network.yml` now is controlled by the `DOCKER_EXT_NETWORK` variable and no longer
+needs to be edited directly
+- Remove deprecated VC parameter from Teku
+- Improve Grafana dashboards
+- The size of `ANCIENT_DIR` is shown during `./ethd space`, if it is set
+- `./ethd resync-execution` also removes contents of `ANCIENT_DIR`, if it is set
+- Add `--trace` option to `./ethd update` and `./ethd keys`. Please be careful, the output may include secrets.
+- Update Lido exit oracles on Hoodi and Mainnet
+- Remove pre-Pectra migration logic
+- Update Siren and Prysm repo locations
+- Update Eth Docker repo location to `ethstaker` organization, from `eth-educators`
+
+Bug fixes
+- Remove an extra `https://` in default Hoodi relays
+- Fix `./ethd prune-reth` command
+- Fix detection logic for Erigon Caplin
 
 ## v2.15.3.0 2025-05-13
 
