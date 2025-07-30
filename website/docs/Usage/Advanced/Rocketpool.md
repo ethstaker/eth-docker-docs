@@ -82,8 +82,9 @@ Of note, the Prysm validator client in RocketPool only works with the Prysm cons
 Connect Eth Docker to RocketPool's docker network.
 
 - `nano .env` and add `:ext-network.yml` to `COMPOSE_FILE`
-- `nano ext-network.yml` and change the line that reads `name: traefik_default` to `name: rocketpool_net`
-- `./ethd start` or, if you already have Eth Docker running, `./ethd update` followed by `./ethd up`
+- Make sure that `DOCKER_EXT_NETWORK=rocketpool_net` in the same `.env` file
+- Save the `.env` file with Ctrl-X
+- `./ethd up` or, if you already have Eth Docker running, `./ethd update` followed by `./ethd up`
 - `rocketpool service start` and Rocketpool should come up
 
 You can continue following the Rocketpool instructions at this point.
