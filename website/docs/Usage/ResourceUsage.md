@@ -36,7 +36,7 @@ DB Size is shown with two values like "1.2 TiB / 830 GiB", for a full node and a
 | Geth   | 1.15.11 | May 2025 | ~1.2 TiB / ~830 GiB | ~7-8 GiB / week | ~ 8 GiB | |
 | Nethermind | 1.31.10 | May 2025 | ~1.1 TiB / ~740 GiB | ~11 GiB / week | ~ 7 GiB | With HalfPath, can automatic online prune at ~350 GiB free |
 | Besu | v25.4.1 | May 2025 | ~1.35 TiB / ~865 GiB | ~7-8 GiB / week | ~ 10 GiB | |
-| Reth | 1.5.0 | July 2025 | ~1.6 TiB / ~1.1 TiB | ~ 7-8 GiB / week | ~ 9 GiB | |
+| Reth | 1.5.0 | July 2025 | ~1.6 TiB / ~950 GiB | ~ 7-8 GiB / week | ~ 9 GiB | |
 | Erigon | 3.0.3 | May 2025 | ~1.0 TiB / ~650 GiB | ~7-8 GiB / week | See comment | Erigon will have the OS use all available RAM as a DB cache during post-sync operation, but this RAM is free to be used by other programs as needed. During sync, it may run out of memory on machines with 32 GiB or less |
 | Nimbus | 0.1.0-alpha | May 2025 | ?? / 755 GiB | ?? | ?? | With Era1 import |
 
