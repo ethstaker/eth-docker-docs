@@ -17,7 +17,7 @@ It can also be used to run the Vero client with multiple client pairs to connect
 
 ```
 cd ~
-git clone https://github.com/eth-educators/eth-docker.git <dirname>
+git clone https://github.com/ethstaker/eth-docker.git <dirname>
 ```
 
 It is important that `<dirname` is unique, and for simplicity, you may want them all under the same top-level directory.

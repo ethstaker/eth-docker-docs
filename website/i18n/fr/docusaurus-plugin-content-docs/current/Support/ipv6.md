@@ -1,6 +1,6 @@
 ---
 title: IPv6
-sidebar_position: 11
+sidebar_position: 10
 sidebar_label: IPv6 support
 ---
 

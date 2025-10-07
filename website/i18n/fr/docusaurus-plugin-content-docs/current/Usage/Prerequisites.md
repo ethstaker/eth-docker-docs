@@ -1,6 +1,6 @@
 ---
 title: "Install Prerequisites."
-sidebar_position: 11
+sidebar_position: 12
 sidebar_label: Prerequisites
 ---
 
@@ -24,7 +24,7 @@ use your entire disk during the install.
 
 ### Automatic installation
 
-Clone the project: `git clone https://github.com/eth-educators/eth-docker.git && cd eth-docker`
+Clone the project: `git clone https://github.com/ethstaker/eth-docker.git && cd eth-docker`
 
 Run `./ethd install` and follow prompts
 
@@ -55,7 +55,7 @@ Eth Docker has been tested on Debian 11 "Bullseye" and Debian 12 "Bookworm".
 
 ### Automatic installation
 
-Clone the project: `git clone https://github.com/eth-educators/eth-docker.git && cd eth-docker`
+Clone the project: `git clone https://github.com/ethstaker/eth-docker.git && cd eth-docker`
 
 Run `./ethd install` and follow prompts
 
@@ -85,7 +85,7 @@ If you like, you can also add a docker-compose alias, replacing `MYUSERNAME` wit
 Other distributions are expected to work as long as they support git, Docker, and Docker Compose.
 
 On Linux, Docker Compose runs as root by default. The individual containers do not, they run as local users inside the
-containers. "Rootless mode" is expected to work for docker with this project, as it does not use AppArmor.
+containers. "Rootless mode" is expected to work for Docker with this project, as it does not use AppArmor.
 
 ## Change Docker storage location
 
@@ -188,9 +188,6 @@ Verify that all containers started automatically:
 sudo docker ps
 ```
 
-If you like, you can also add a docker-compose alias, replacing `MYUSERNAME` with your actual user name:
-`echo 'alias docker-compose="docker compose"' >>/home/MYUSERNAME/.profile`
-
 ## rootless Docker
 
 Eth Docker works with [rootless Docker](https://docs.docker.com/engine/security/rootless/).
@@ -206,15 +203,18 @@ If using traefik, either change its ports in `.env` to be above `1024`, or
 > The following prerequisites apply if you are going to use macOS as a server to run an Ethereum staking full node. If
 you use macOS to connect *to* a node server, all you need is an SSH client.
 
-- Install [Docker Desktop](https://www.docker.com/products/docker-desktop) and allocate 16+ GiB of RAM and 3TB or so
-of storage space to it, in Preferences->Resources->Advanced.
+- Install [OrbStack](https://orbstack.dev/), e.g. with `brew install orbstack`
+- As an alternative to Orbstack, you could install [Docker Desktop](https://www.docker.com/products/docker-desktop) and
+allocate 16+ GiB of RAM and 3TB or so of storage space to it, in Preferences->Resources->Advanced. Unlike OrbStack,
+Docker Desktop does not dynamically allocate memory and disk space, and it can be temperamental depending on release.
 - Install prerequisites via homebrew: `brew install coreutils newt bash`
 - You may need to log out and back into your terminal session to have the right version of bash. Try `bash --version`
 and verify it's 5.x or higher.
 - Verify git is installed with `git --version`. It will show a Desktop prompt to install it if it isn't.
 
-> Docker Desktop on macOS has its ideosyncrasies. An arguable easier path could be to keep macOS just for firmware
-updates and [dual-boot into Debian Linux](https://wiki.debian.org/InstallingDebianOn/Apple).
+> An arguably easier path could be to keep macOS just for firmware updates and dual-boot into
+[Asahi Linux](https://asahilinux.org/) on Apple Silicon Macs or
+[Debian Linux](https://wiki.debian.org/InstallingDebianOn/Apple) on Intel x64 Macs.
 
 ## Windows 11
 

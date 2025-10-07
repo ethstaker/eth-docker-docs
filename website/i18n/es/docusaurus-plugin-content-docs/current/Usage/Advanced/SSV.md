@@ -9,7 +9,7 @@ Eth Docker supports running an SSV node, together with a consensus client and ex
 ## Setup Prerequisites
 ### Get Eth Docker
 - Clone this tool
-  - `git clone https://github.com/eth-educators/eth-docker.git ssv-node && cd ssv-node`
+  - `git clone https://github.com/ethstaker/eth-docker.git ssv-node && cd ssv-node`
 
 ### On Linux
 - Install docker, unless you already have it

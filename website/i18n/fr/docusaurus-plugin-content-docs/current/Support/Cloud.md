@@ -116,12 +116,14 @@ It can be useful to have a single execution client service multiple consensus cl
 To allow Docker traffic to the execution client while dropping all other traffic:
 - `sudo ufw allow from 172.16.0.0/12 to any port 8545`
 - `sudo ufw allow from 192.168.0.0/16 to any port 8545`
-- `sudo ufw allow from 10.0.0.0/8 to any port 8545`
 - `sudo ufw deny 8545`
 - `sudo ufw allow from 172.16.0.0/12 to any port 8546`
 - `sudo ufw allow from 192.168.0.0/16 to any port 8546`
-- `sudo ufw allow from 10.0.0.0/8 to any port 8546`
 - `sudo ufw deny 8546`
+
+The rules above are a little overly broad for simplicity, to cover all default Docker subnets. You can restrict this
+to the actual defaults by adding more specific rules. For the Docker default subnets, see the section about
+`after.rules`.
 
 > With ISP traffic caps, it could be quite attractive to run the execution client in a small VPS, and reference it from a consensus client somewhere
 > else. This requires a [secure proxy](../Usage/ReverseProxy.md).

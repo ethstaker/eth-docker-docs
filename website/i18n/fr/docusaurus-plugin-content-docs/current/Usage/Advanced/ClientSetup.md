@@ -130,3 +130,4 @@ to a central traefik/prometheus.
 - `nimbus-stats.yml` - Send Nimbus stats to beaconcha.in app
 - `prysm-stats.yml` - Send Prysm stats to beaconcha.in app
 - `ssv.yml` - Run an SSV DVT node
+- `contributoor.yml` - EthPandaOps Contributoor, for use alongside a consensus layer client. Read more at [Contributoor GitHub](https://github.com/ethpandaops/contributoor)

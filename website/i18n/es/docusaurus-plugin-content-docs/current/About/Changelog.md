@@ -13,9 +13,103 @@ modifications. If you want to reset the source or binary build targets in `.env`
 instead.
 * `./ethd up` - use the new client version(s)
 
-> On 1/27/2022, Eth Docker's repository name changed. Everything should work as it did.
-> If you do wish to manually update your local reference, run `git remote set-url origin https://github.com/eth-educators/eth-docker.git`
+> On 6/21/2025, Eth Docker's repository name changed. Everything should work as it did.
+> If you do wish to manually update your local reference, run `git remote set-url origin https://github.com/ethstaker/eth-docker.git`
 
+## v2.16.0.0 2025-07-04
+
+*This release is recommended*
+
+The headline feature is execution layer history expiry, so an Ethereum node fits into roughly 1 TiB.
+
+**Breaking changes**
+- Require Besu `25.7.0`, use promoted Besu pruning parameters without `-X`
+
+Changes
+- Support pre-merge history expiry for all execution layer clients: `./ethd prune-history`
+- Geth archive node fresh sync uses path-based state scheme
+- Enable Vero keymanager API
+- `./ethd install` can apply host-level optimizations
+- `ext-network.yml` now is controlled by the `DOCKER_EXT_NETWORK` variable and no longer
+needs to be edited directly
+- Remove deprecated VC parameter from Teku
+- Improve Grafana dashboards
+- The size of `ANCIENT_DIR` is shown during `./ethd space`, if it is set
+- `./ethd resync-execution` also removes contents of `ANCIENT_DIR`, if it is set
+- Add `--trace` option to `./ethd update` and `./ethd keys`. Please be careful, the output may include secrets.
+- Update Lido exit oracles on Hoodi and Mainnet
+- Remove pre-Pectra migration logic
+- Update Siren and Prysm repo locations
+- Update Eth Docker repo location to `ethstaker` organization, from `eth-educators`
+
+Bug fixes
+- Remove an extra `https://` in default Hoodi relays
+- Fix `./ethd prune-reth` command
+- Fix detection logic for Erigon Caplin
+
+## v2.15.3.0 2025-05-13
+
+*This release is optional, yet recommended*
+
+Changes
+
+- Support pre-merge history expiry with Geth, Nethermind and Nimbus-EL: `./ethd prune-history`
+- Offer Nimbus EL alpha during `./ethd config` if on Hoodi or Sepolia
+- Support Era1/Era file import for Nimbus EL
+- Support Fluffy Portal client for use with Nimbus EL
+- Offer Teku when configuring Ephemery testnet during `./ethd config`
+- Nag users about old Docker Compose and about hosts that haven't been updated in 300+ days
+- Erigon's current expiry changed to `EL_MINIMAL_NODE=aggressive`, to support coming pre-merge expiry
+- Switch users to new Offchainlabs Prysm repos
+- Switch users to new Besu tags
+- Update Lido default oracles on Hoodi
+- Bump `cadvisor` to `0.52.1`
+- Enable `cadvisor` to detect OOM events
+- Interactive `./ethd update` writes a log into `/tmp`
+- Support doppelganger protection in SSV `2.3.1` and later
+- Create `.env.bak` earlier when migrating `.env`, improve the error handler: Better chance a backup exists
+and user is not left with a broken `.env` if `./ethd update` fails
+- Increase Web3signer heap to 6g. There is a memory issue here somewhere - a remote signer *should* work
+just fine with 2g, and mine does. If yours takes >2g on startup, recommend discussing with Consensys so
+this can be fixed.
+
+Bug fixes
+- Fix Lighthouse IPv6 ENR
+- Nimbus EL Compose labels cleaned up
+- Resolve an incompatibility with Docker Compose 2.17.2 and earlier
+- Exact match for `--help` - can now run `./ethd cmd run --rm execution --help` for example and get the help
+screen for the execution layer client, not the help screen for `./ethd`
+- Fix Nimbus slottime source build
+- `ethereum-metrics-exporter` will query the `consensus` service when used in a Lido x Obol setup
+
+## v2.15.2.0 2025-04-20
+
+*This release is optional, yet recommended*
+
+Changes
+
+- Support Vero "in a box" with multiple Ethereum nodes, by introducing additional aliases
+- Better support for Caplin
+- Split EL and CL archive nodes
+- Better PostgreSQL update
+- `./ethd update` runs in `screen` by default: Use `./ethd update --non-interactive` to override that
+- Default to PostgreSQL 17
+- Source build with Go 1.24
+- New SSV Grafana dashboard
+- Dependency upgrades, such as ethereum-metrics-exporter and pre-commit-hooks
+- Web3signer heap is configurable
+- `./ethd update` refactor to eliminate "did not migrate an .env variable" style bugs
+- Hoodi network support in `./ethd config`
+- Caplin support in `./ethd config`
+- Besu no longer defaults to "high spec" on 64 GiB RAM - I don't know that Besu may use the RAM. If you want it
+to, use `EL_EXTRAS`
+- Query history expiry when using Erigon: Expect this to change again as history expiry gets fleshed out
+post-Pectra
+- A small zoo of messaging improvements to make things (hopefully) clearer
+
+Bug fixes
+- Custom `NETWORK` as a github repo adjusted to work again, this had been broken for a while. Thanks early Hoodi!
+- Lido Obol works with Lodestar
 
 ## v2.15.1.0 2025-02-04
 

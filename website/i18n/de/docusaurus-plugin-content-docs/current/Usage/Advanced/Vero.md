@@ -29,7 +29,7 @@ For this example, I will use Teku/Besu, Nimbus/Reth and Lodestar/Erigon, with a 
 
 ## Vero inna box - all on the same machine
 
-You will need sufficient RAM and storage. On mainnet, 64 GiB RAM and 8TB NVMe should be enough.
+You will need sufficient RAM and storage. On mainnet, 96 GiB RAM and 8TB NVMe should be enough.
 
 ### Prepare four (4) Eth Docker stacks
 
@@ -38,10 +38,10 @@ solely for your convenience.
 
 ```
 cd ~
-git clone https://github.com/eth-educators/eth-docker vero
-git clone https://github.com/eth-educators/eth-docker eth-tb
-git clone https://github.com/eth-educators/eth-docker eth-nr
-git clone https://github.com/eth-educators/eth-docker eth-le
+git clone https://github.com/ethstaker/eth-docker vero
+git clone https://github.com/ethstaker/eth-docker eth-tb
+git clone https://github.com/ethstaker/eth-docker eth-nr
+git clone https://github.com/ethstaker/eth-docker eth-le
 ```
 
 ### Configure first through third client pair
@@ -135,12 +135,6 @@ What is happening here:
 
 ### Start clients and import keys
 
-#### Temporary instructions
-
-Vero will support keymanager with Vero 1.1, post Pectra. Once it does, ignore those instructions.
-
-Change to a client that can import keys, while Vero cannot yet. `nano .env` and change `COMPOSE_FILE=teku-vc-only.yml:web3signer.yml`
-
 #### Start everything
 
 `cd` to each directory and start, with Vero first - we need its Docker bridge network to be up.
@@ -172,15 +166,6 @@ If there are issues here, fix them.
 > Failure to heed this warning **will** get your keys slashed - penalized and force-exited.
 
 Once you are certain these keys aren't already running somewhere, import them with `./ethd keys import`
-
-#### Temporary instructions
-
-If this is a Vero that doesn't support keymanager API, switch to the actual Vero client now:
-`nano .env` and change `COMPOSE_FILE=vero-vc-only.yml:web3signer.yml`
-
-There is no slashing risk to this, because Web3signer handles signing and slashing protection.
-
-Start Vero: `./ethd up`
 
 ### Verify it all works
 

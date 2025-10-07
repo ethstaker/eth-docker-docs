@@ -1,6 +1,6 @@
 ---
 title: Resources, hardware
-sidebar_position: 3
+sidebar_position: 4
 sidebar_label: Hardware
 ---
 
@@ -20,7 +20,7 @@ of storage initially, as of Jan 2024. The on-disk growth pattern differs between
 [resource use](../Usage/ResourceUsage.md).
 
 If you have a 2TB disk, it is expected to last (potentially with execution client pruning) until early 2025.
-Remy wrote a [migration guide to 4TB](https://github.com/eth-educators/ethstaker-guides/blob/main/migrating-to-a-larger-disk.md).
+Remy wrote a [migration guide to 4TB](https://github.com/ethstaker/ethstaker-guides/blob/main/migrating-to-a-larger-disk.md).
 Also keep an eye on [EIP-4444](https://eips.ethereum.org/EIPS/eip-4444).
 
 Two home server builds that I like and am happy to recommend are below. Both Intel and AMD support IPMI, which means

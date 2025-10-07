@@ -1,6 +1,6 @@
 ---
 title: Networking and port forwarding
-sidebar_position: 4
+sidebar_position: 5
 sidebar_label: Network configuration
 ---
 

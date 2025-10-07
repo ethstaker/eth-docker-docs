@@ -1,6 +1,6 @@
 ---
 title: "Additional security: Secure Web Proxy"
-sidebar_position: 9
+sidebar_position: 10
 sidebar_label: Secure Web Proxy
 ---
 

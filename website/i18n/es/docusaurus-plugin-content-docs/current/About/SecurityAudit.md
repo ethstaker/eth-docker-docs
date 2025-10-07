@@ -4,7 +4,28 @@ sidebar_position: 6
 sidebar_label: Security Audit
 ---
 
-# Findings
+## Reaudit Findings October 2024
+
+Sigma Prime conducted a security audit of the changes to Eth Docker v2.12.3.0 since v2.3, with findings presented in October 2024.
+
+A huge thank-you to both Sigma Prime for the audit, and Ethstaker for funding it.
+
+[Findings as PDF](../../static/pdf/Sigma_Prime_Eth_Docker_Update_2_v2_0.pdf)
+
+There is one informational finding.
+
+### Response
+
+Sigma Prime point out that "Sensitive Data Can Be Handled By Secrets", such as the JWT Secret, which secures the Engine API connection.
+
+Their testing team concurs with the response:
+> [Docker secrets] are of marginal utility, [since] if the host is breached on the user running Eth Docker, then by virtue of needing to be
+able to run Docker, that user can access the JWT secret no matter how it is stored. In addition, the engine port is
+kept within the Docker bridge network by default, not mapped to host.
+
+More to the point, though, Docker does not support secrets unless run in Docker swarm mode.
+
+## Initial Audit Findings May 2023
 
 Sigma Prime conducted a security audit of Eth Docker 2.2.8.4 during March and April 2023, with findings presented on April 30th 2023.
 
@@ -15,7 +36,7 @@ A huge thank-you to both Sigma Prime for the audit, and Ethereum Foundation for 
 There are one medium severity and four informational findings. The medium-severity finding is about the entropy used for JWT secret,
 API manager token in Nimbus and Lodestar, Prysm wallet password, and Teku cert password: Entropy comes from `$RANDOM` and is therefore only 16 bits.
 
-# Response
+### Response
 
 Eth Docker v2.3 addresses these findings. It now uses 64 bits of entropy and SHA-256 hash.
 

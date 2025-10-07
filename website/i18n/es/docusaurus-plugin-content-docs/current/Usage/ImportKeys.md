@@ -1,6 +1,6 @@
 ---
 title: "Create and import validator keys to the client"
-sidebar_position: 2
+sidebar_position: 3
 sidebar_label: Import Validator Keys
 ---
 

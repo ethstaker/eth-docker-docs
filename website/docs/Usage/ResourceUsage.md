@@ -1,6 +1,6 @@
 ---
 title: Client Resource Usage
-sidebar_position: 10
+sidebar_position: 11
 sidebar_label: Client Resource Usage
 ---
 
@@ -42,7 +42,7 @@ DB Size is shown with two values like "1.2 TiB / 830 GiB", for a full node and a
 
 Notes on disk usage
 - Reth, Besu, Geth, Erigon and Nimbus continously prune
-- Nethermind - DB size can be reduced when it grew too large, by [online prune](../Support/Prune.md). Keep an eye
+- Nethermind - DB size can be reduced when it grew too large, by [online prune](NodeTypes.md). Keep an eye
 on [Paprika](https://github.com/NethermindEth/nethermind/pull/7157) and
 [Path](https://github.com/NethermindEth/nethermind/pull/6499) work
 

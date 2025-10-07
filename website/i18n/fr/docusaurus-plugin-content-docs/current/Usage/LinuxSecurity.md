@@ -1,6 +1,6 @@
 ---
 title: Linux security and setup recommendations
-sidebar_position: 5
+sidebar_position: 6
 sidebar_label: Linux Security
 ---
 

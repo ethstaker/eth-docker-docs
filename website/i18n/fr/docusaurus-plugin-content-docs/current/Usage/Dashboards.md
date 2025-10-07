@@ -1,6 +1,6 @@
 ---
 title: "Choose a Grafana dashboard (optional)"
-sidebar_position: 7
+sidebar_position: 8
 sidebar_label: Dashboards
 ---
 

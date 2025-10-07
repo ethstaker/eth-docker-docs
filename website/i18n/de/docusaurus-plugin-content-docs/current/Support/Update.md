@@ -13,8 +13,8 @@ node is up and running
 
 ## Automated update
 
-Inside the project directory, run:<br />
-`./ethd update`
+Inside the project directory, run:
+  `./ethd update`
 
 This will update Eth Docker, all Ethereum clients, and migrate your `.env` settings over to a fresh copy
 from `default.env`.
@@ -25,8 +25,8 @@ Restart changed containers with `./ethd up`.
 
 ## Optional: Manually update Eth Docker
 
-Inside the project directory, run:<br />
-`git pull`
+Inside the project directory, run:
+  `git pull`
 
 Then `cp .env .env.bak` and `cp default.env .env`, and set variables inside `.env`
 the way you need them, with `.env.bak` as a guide.
@@ -45,14 +45,5 @@ And restart changed containers: `./ethd up`
 
 Then verify that the components are coming up okay again by looking at logs:
 - `./ethd logs -f consensus` for the consensus client
-- `./ethd logs -f validator` for the validator, if using Lighthouse or Prysm
-- `./ethd logs -f execution` for the execution client, if you are running one locally
-
-## Optional: Update just the execution client, instead of the entire "stack"
-
-Run:<br />
-`./ethd cmd build --pull execution`
-
-Then stop, remove and start the execution client:<br />
-`./ethd cmd stop execution && ./ethd cmd rm execution`<br />
-`./ethd up`
+- `./ethd logs -f validator` for the validator client
+- `./ethd logs -f execution` for the execution client

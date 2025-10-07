@@ -26,7 +26,7 @@ You can continue following the Rocketpool instructions at this point.
 
 ### Configure Eth Docker
 
-If you are not running Eth Docker already, grab it with `git clone https://github.com/eth-educators/eth-docker.git && cd eth-docker`.
+If you are not running Eth Docker already, grab it with `git clone https://github.com/ethstaker/eth-docker.git && cd eth-docker`.
 
 #### With remote Prysm
 
@@ -75,15 +75,16 @@ Set up Eth Docker next before following the rest of the Rocketpool instructions.
 
 ### Configure Eth Docker
 
-If you are not running Eth Docker already, grab it with `git clone https://github.com/eth-educators/eth-docker.git && cd eth-docker`, and configure it with `./ethd config`. Choose an Ethereum node deployment. Make sure to choose the same Ethereum PoS network and consensus layer client as you chose in RocketPool.
+If you are not running Eth Docker already, grab it with `git clone https://github.com/ethstaker/eth-docker.git && cd eth-docker`, and configure it with `./ethd config`. Choose an Ethereum node deployment. Make sure to choose the same Ethereum PoS network and consensus layer client as you chose in RocketPool.
 
 Of note, the Prysm validator client in RocketPool only works with the Prysm consensus layer client in Eth Docker. Other clients can be mixed and matched to an extent, e.g. a Lighthouse validator client in RocketPool to a Teku consensus layer client in Eth Docker.
 
 Connect Eth Docker to RocketPool's docker network.
 
 - `nano .env` and add `:ext-network.yml` to `COMPOSE_FILE`
-- `nano ext-network.yml` and change the line that reads `name: traefik_default` to `name: rocketpool_net`
-- `./ethd start` or, if you already have Eth Docker running, `./ethd update` followed by `./ethd up`
+- Make sure that `DOCKER_EXT_NETWORK=rocketpool_net` in the same `.env` file
+- Save the `.env` file with Ctrl-X
+- `./ethd up` or, if you already have Eth Docker running, `./ethd update` followed by `./ethd up`
 - `rocketpool service start` and Rocketpool should come up
 
 You can continue following the Rocketpool instructions at this point.
