@@ -11,10 +11,6 @@ module.exports = {
         image: 'img/eth-moby-logo.png',
     },
     scripts: ['https://buttons.github.io/buttons.js'],
-    i18n: {
-      defaultLocale: 'en',
-      locales: ['en', 'fr', 'es', 'de'],
-    },
     future: {
       experimental_faster: true,
       v4: true,
@@ -42,10 +38,6 @@ module.exports = {
                     href: '/',
                     label: 'Get Started',
                     position: 'right',
-                },
-                {
-                  type: 'localeDropdown',
-                  position: 'left',
                 }
             ],
         },
