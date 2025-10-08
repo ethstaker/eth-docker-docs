@@ -10,20 +10,23 @@ You can run an Archive node, with all history and full lookup for all historical
 
 You can run a Full node, with all history and limited lookup for historical transactions. This fits into a 4TB drive and is often the choice for RPC nodes.
 
-You can run an Expired node, with pre-merge history and receipts gone. This fits into a 2TB drive and is foten the choice for validator nodes.
+You can run an Expired node, with pre-merge history and receipts gone. This fits into a 2TB drive and is often the choice for validator nodes.
 
 This is controlled by variables in `.env`, which can be set with `nano .env`. Switching from one type to another often requires a full resync.
 
-`CL_ARCHIVE_NODE` - run the consensus layer node as an archive, including blobs where supported  
-`CL_MINIMAL_NODE` - run the consensus layer node with minimal storage
-
 `EL_ARCHIVE_NODE` - run the execution layer node as an archive. The required space can vary widely depending on the client: From right around 2 TB to well over 50TB  
 `EL_MINIMAL_NODE` - run the execution layer node with history expiry. `true` is pre-merge history expiry; `rolling` is 1-year rolling if the client supports it;
-`aggressive` expires all but the last few blocks, if the client supoorts it
+`aggressive` expires all but the last few blocks, if the client supports it
+
+If both variables are set to `false`, you have a Full node.
+
+`CL_ARCHIVE_NODE` - run the consensus layer node as an archive, including blobs where supported
+`CL_MINIMAL_NODE` - run the consensus layer node with minimal storage, if the client makes that distinction. See the `--help` for Grandine and Teku, for example,
+with `./ethd cmd run --rm consensus --help`, or directly via `docker run` on their image.
 
 ## Switch from Full to Expired node
 
-You can use `./ethd prune-history` to switch the client to history expiry, in some cases without resync. Note that Besu requires 200 GiB free for this, and
+You can use `./ethd prune-history` to switch the execution layer client to history expiry, in some cases without resync. Note that Besu requires 200 GiB free for this, and
 it will take less space if instead it is resynced with `./ethd resync-execution` while `EL_MINIMAL_NODE=true`
 
 ## State pruning
