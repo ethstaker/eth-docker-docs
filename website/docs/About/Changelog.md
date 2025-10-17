@@ -16,6 +16,39 @@ instead.
 > On 6/21/2025, Eth Docker's repository name changed. Everything should work as it did.
 > If you do wish to manually update your local reference, run `git remote set-url origin https://github.com/ethstaker/eth-docker.git`
 
+## v2.17.0.0 2025-10-17
+
+*This release is recommended*
+
+**Breaking changes**
+- Require Erigon `3.1.0` or later
+- Require Lodestar `1.34.1` or later
+- Require Reth `1.8.0` or later
+- `nodeexporter` uses `host` networking, which uses a configurable port and requires changes to `ufw` **if**
+ufw has been placed "in front of" Docker, see [Cloud Security](../Support/Cloud.md).
+
+Changes
+- Support Ethrex execution client
+- Support Anchor SSV client
+- Support Prysm beacon DB pruning when `CL_MINIMAL_NODE=true`
+- Support DDNS with `traefik-aws.yml`, including automated `CNAME` creation
+- Prometheus can scrape targets on the host system, using `host.docker.internal`
+- Support Grandine doppelganger detection
+- `./ethd keys count` now displays validator statuses
+- Support Reth DB repair
+- Remove Fluffy and Portal support. RIP.
+- Support Vero doppelganger detection
+- Expired Reth prunes tx lookups
+- Add Grandine dashboard to Grafana
+- More linting and dependabot: Strengthen automated checks
+
+Bug fixes
+- `chmod` of the `dkg-output` directory fixed
+- Fix source builds throughout, they broke with recent Docker 28.5.x
+- Fix promtail regex and time parsing
+- Improve commit-boost sample config file
+- Reth obeys the `LOG_LEVEL`
+
 ## v2.16.0.0 2025-07-04
 
 *This release is recommended*
