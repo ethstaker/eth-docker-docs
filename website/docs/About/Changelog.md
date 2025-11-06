@@ -16,9 +16,11 @@ instead.
 > On 6/21/2025, Eth Docker's repository name changed. Everything should work as it did.
 > If you do wish to manually update your local reference, run `git remote set-url origin https://github.com/ethstaker/eth-docker.git`
 
-## v2.18.0.0 2025-11-05
+## v2.18.0.2 2025-11-09
 
 *This release is optional, and recommended*
+
+> `v2.18.0.0` and `v2.18.0.1` broke Nimbus and Teku when `MEV_BUILD_FACTOR` was set. Those releases have been retracted.
 
 The headline feature is `MEV_BUILD_FACTOR` to abstract control over local block building, so home stakers
 can control their upload bandwidth better post-Fusaka.
@@ -44,6 +46,9 @@ Changes
 - Erigon can now be run in distributed mode, with a CL on another server
 - Suggest history expiry when disk space is low
 - Remove Vero CL check before starting it. It now does this itself
+- Support commit boost PBS version during `./ethd version`
+- Prompt user for Docker-CE update if it's below 28.5.2, because of the `runc` vulnerabilities
+- Use the client defaults for max peers, do not replicate these defaults in Eth Docker
 
 Bug fixes
 - `./ethd update --refresh-targets` no longer touches `PG_DOCKER_TAG`
@@ -51,6 +56,8 @@ Bug fixes
 - Erigon WS port is now correctly set to the value of `EL_WS_PORT`
 - Adjusted source builds for Grandine and Ethrex
 - Fixed Ethrex entrypoint when `EL_MINIMAL_NODE=false`
+- Fix Nimbus startup failures when `MEV_BUILD_FACTOR` is set
+- Fix Teku startup failures when `MEV_BUILD_FACTOR` is set
 
 ## v2.17.0.0 2025-10-17
 
