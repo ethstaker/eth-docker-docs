@@ -142,3 +142,10 @@ consensus client, the Traefik port at default, and your domain is `example.com`.
 Lighthouse and Teku also support failover nodes, which means you could configure
 `CL_NODE=https://cl.example.com,https://cl2.example.com`
 
+### IPv4 vs. IPv6
+
+In some cases putting UFW in front of Docker only works with IPv4 which is blocked by UFW while allowing IPv6 traffic through.  This is bad because it is like having two doors to a house where only one is locked.
+
+Checking for this potential issue is easy as follows:
+
+
