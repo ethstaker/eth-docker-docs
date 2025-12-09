@@ -148,4 +148,28 @@ In some cases putting UFW in front of Docker only works with IPv4 which is block
 
 Checking for this potential issue is easy as follows:
 
+``curl -6 https://subdomain.domain.com``
+
+If this allows traffic through, you need to disable IPv6 as follows:
+
+``sudo nano /etc/sysctl.conf``
+
+Add the following lines:
+
+``net.ipv6.conf.all.disable_ipv6 = 1``
+``net.ipv6.conf.default.disable_ipv6 = 1``
+``net.ipv6.conf.lo.disable_ipv6 = 1``
+
+Apply the changes:
+
+``sudo sysctl -p``
+``sudo reboot``
+
+And then try it again:
+
+``curl -6 https://subdomain.domain.com``
+
+Which should fail completely.  IPv6 is now blocked.
+
+
 
