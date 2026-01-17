@@ -48,6 +48,9 @@ addresses.
 `ufw` integration works; ports mapped to host can be blocked by a v6 deny rule. As with v4, ufw needs to be
 ["in front of Docker"](../Support/Cloud.md) for this to work.
 
+Note that host-mapped ports may not be reachable by default if ufw has been enabled. If you use ufw, please
+place it ["in front of Docker"](../Support/Cloud.md) and configure explicit allow rules for your P2P ports.
+
 On your LAN firewall, if this is in a LAN, you'd need rules to allow the P2P ports incoming to the v6 address of your
 node.
 

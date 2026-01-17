@@ -47,7 +47,30 @@ Note this deliberately keeps ufw rules from influencing any traffic sourced from
 This may *not* be what you need, in which case just remove those seven lines, and be sure to allow needed
 container traffic through explicit ufw rules, if you are blocking a port.
 
-### 2) Edit before.init
+### 2) Edit after6.rules:
+
+`sudo nano /etc/ufw/after6.rules` and add to the end of the file, *after* the existing `COMMIT`:
+
+```
+*filter
+:ufw-user-input - [0:0]
+:DOCKER-USER - [0:0]
+
+# ufw in front of docker while allowing all inter-container traffic
+-A DOCKER-USER -s fe80::/10 -j RETURN
+-A DOCKER-USER -s fd00::/8 -j RETURN
+
+-A DOCKER-USER -j ufw-user-input
+-A DOCKER-USER -j RETURN
+
+COMMIT
+```
+
+Note this deliberately keeps ufw rules from influencing any traffic sourced from the standard Docker ULA IPv6 ranges.
+This may *not* be what you need, in which case just remove those seven lines, and be sure to allow needed
+container traffic through explicit ufw rules, if you are blocking a port.
+
+### 3) Edit before.init
 
 `sudo nano /etc/ufw/before.init` and change `stop)` to read:
 
@@ -57,6 +80,9 @@ stop)
     iptables -F DOCKER-USER || true
     iptables -A DOCKER-USER -j RETURN || true
     iptables -X ufw-user-input || true
+    ip6tables -F DOCKER-USER || true
+    ip6tables -A DOCKER-USER -j RETURN || true
+    ip6tables -X ufw-user-input || true
     ;;
 ```
 
@@ -65,7 +91,7 @@ Then, make it executable: `sudo chmod 750 /etc/ufw/before.init`
 Dropping `ufw-user-input` through `before.init` is a required step. Without it, ufw cannot be reloaded, it would display an error message
 stating "ERROR: Could not load logging rules".
 
-### 3) Reload ufw
+### 4) Reload ufw
 
 `sudo ufw reload`
 
@@ -81,8 +107,8 @@ First, verify that Grafana is running and port 3000 is open to world using somet
 
 Next, create ufw rules to allow access from `localhost` and drop access from anywhere else:
 
-- `sudo ufw allow from 127.0.0.1 to any port 3000`
-- `sudo ufw deny 3000`
+- `sudo ufw allow proto tcp from 127.0.0.1 to any port 3000`
+- `sudo ufw deny proto tcp from any to any 3000`
 
 Check again on "yougetsignal" or the like that port 3000 is now closed.
 
@@ -101,8 +127,8 @@ First, verify that Prysm Web UI is running and port 7500 is open to world using 
 
 Next, create ufw rules to allow access from `localhost` and drop access from anywhere else:
 
-- `sudo ufw allow from 127.0.0.1 to any port 7500`
-- `sudo ufw deny 7500`
+- `sudo ufw allow proto tcp from 127.0.0.1 to any port 7500`
+- `sudo ufw deny proto tcp port 7500`
 
 Check again on [you get signal](https://www.yougetsignal.com/tools/open-ports/) or the like that port 7500 is now closed.
 
@@ -114,12 +140,12 @@ you started the SSH session *from*. You expect to be able to reach the Prysm Web
 It can be useful to have a single execution client service multiple consensus clients, for example when testing, or running a solo staking docker-compose stack as well as a pool docker-compose stack.
 
 To allow Docker traffic to the execution client while dropping all other traffic:
-- `sudo ufw allow from 172.16.0.0/12 to any port 8545`
-- `sudo ufw allow from 192.168.0.0/16 to any port 8545`
-- `sudo ufw deny 8545`
-- `sudo ufw allow from 172.16.0.0/12 to any port 8546`
-- `sudo ufw allow from 192.168.0.0/16 to any port 8546`
-- `sudo ufw deny 8546`
+- `sudo ufw allow proto tcp from 172.16.0.0/12 to any port 8545`
+- `sudo ufw allow proto tcp from 192.168.0.0/16 to any port 8545`
+- `sudo ufw deny proto tcp from any top any port 8545`
+- `sudo ufw allow proto tcp from 172.16.0.0/12 to any port 8546`
+- `sudo ufw allow proto tcp from 192.168.0.0/16 to any port 8546`
+- `sudo ufw deny proto tcp from any to any port 8546`
 
 The rules above are a little overly broad for simplicity, to cover all default Docker subnets. You can restrict this
 to the actual defaults by adding more specific rules. For the Docker default subnets, see the section about
@@ -128,9 +154,20 @@ to the actual defaults by adding more specific rules. For the Docker default sub
 > With ISP traffic caps, it could be quite attractive to run the execution client in a small VPS, and reference it from a consensus client somewhere
 > else. This requires a [secure proxy](../Usage/ReverseProxy.md).
 
+### Allowing IPv6 traffic
+
+Ports mapped to host by Docker are reachable on IPv4 by default without the need for ufw rules. This is not true for IPv6 in
+my testing. You can use a [port scanner](https://www.ipvoid.com/port-scan/) to test your P2P TCP ports - defaults `30303` and `9000` -
+on IPv6. If they are `Filtered` instead of `Open`, add explicit rules for P2P. Adjust this to the ports you actually use!!
+
+```
+sudo ufw allow from any to any port 30303
+sudo ufw allow from any to any port 9000
+```
+
 ### Allowing Docker traffic to the host IP
 
-Ports mapped to host by Docker are reachable by default without the need for ufw rules. There is one exeption:
+Ports mapped to host by Docker are reachable on IPv4 by default without the need for ufw rules. There is one exeption:
 If a Docker container on the host tries to reach a port mapped to host by the host IP, this will fail by default.
 
 Example: I am running a Docker container on a host with IP `1.2.3.4`, port `26000` is mapped to host, and the container
