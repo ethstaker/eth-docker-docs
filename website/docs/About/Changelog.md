@@ -16,6 +16,29 @@ instead.
 > On 6/21/2025, Eth Docker's repository name changed. Everything should work as it did.
 > If you do wish to manually update your local reference, run `git remote set-url origin https://github.com/ethstaker/eth-docker.git`
 
+## v26.3.1 2026-03-23
+
+*This is an optional release*
+
+**Breaking changes**
+
+- Requires Nimbus-EL `v0.3.0` or later
+- Requires Besu `26.2.0` or later when using `rolling-expiry` or `aggressive-expiry` or when using IPv6
+- Requires Lodestar `v1.41.0` or later
+
+Changes
+- Support Lodestar QUIC
+- Use IPv6 auto-ENR with Lodestar
+- Support Besu IPv6 P2P
+- Support rolling and aggressive expiry with Besu `26.2.0`
+- Support Reth IPv6 P2P
+- Migrate to PostgreSQL 18
+- Bump Tempo to `2.10.3`
+- Nimbus EL uses the new `nimbus` unified binary
+- Nimbus Verified Proxy supports `Dockerfile.binary`
+- `PROXY_EXTRAS` for Nimbus Verified Proxy
+
+
 ## v26.3.0 2026-03-02
 
 *This is an optional release*
