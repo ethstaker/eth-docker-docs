@@ -40,7 +40,7 @@ An Ethereum staking full node has many moving parts. Here's a high level, concep
 ## Eth Docker feature highlights
 
 - Supports all FOSS (Free and Open Source Software) Ethereum clients in any combination: Lodestar, Nimbus, Teku,
-Grandine, Lighthouse, Prysm; and Nethermind, Besu, Reth, Erigon, Geth
+Grandine, Lighthouse, Prysm; and Nethermind, Besu, Reth, Erigon, Geth, Ethrex, Nimbus-EL
 - Runs on Linux or macOS, Intel/AMD x64 or ARM or RISC-V CPUs
 - Supports running Ethereum nodes, staking or RPC, on Ethereum and Gnosis Chain; supports running ssv.network DVT
 nodes; supports integration with RocketPool in (reverse) hybrid mode

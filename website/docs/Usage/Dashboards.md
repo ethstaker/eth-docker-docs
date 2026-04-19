@@ -1,5 +1,5 @@
 ---
-title: "Choose a Grafana dashboard (optional)"
+title: "Visualize with Grafana dashboards (optional)"
 sidebar_position: 8
 sidebar_label: Dashboards
 ---
@@ -7,13 +7,13 @@ sidebar_label: Dashboards
 ## Choose local or cloud Grafana
 
 You have a choice of running Grafana locally, by including `grafana.yml`, or in the cloud, with `grafana-cloud.yml`.
-If you choose Grafana Cloud, you **must** edit `prometheus/custom-prom.yml` and add your cloud remote write
-credentials. Please see `prometheus/custom-prom.yml.sample` for the syntax of that addition.
+If you choose Grafana Cloud, you **must** edit `./alloy/prometheus-write.alloy` as well as `./alloy/loki-write.alloy`
+and add your cloud remote write credentials. This can also be used to write to a central Grafana stack of your own,
+rather than a hosted cloud offering.
 
-`grafana-cloud.yml` runs a local Prometheus but no local Grafana, and enables adding custom Prometheus config items.
-Its contents are merged with the pre-provisioned configuration.
+`grafana-cloud.yml` runs a local Alloy but no local Grafana, and enables adding custom Alloy config items.
 
-If you want to add additional scrape targets, place these into `prometheus/conf.d`.
+If you want to add additional scrape targets, place these into `./alloy/config.d`.
 
 ## Local Grafana dashboards
 

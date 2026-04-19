@@ -21,6 +21,8 @@ Currently supported execution clients:
 - [Nethermind](https://github.com/NethermindEth/nethermind)
 - [Geth](https://github.com/ethereum/go-ethereum)
 - [Erigon](https://github.com/ledgerwatch/erigon)
+- [Ethrex](https://github.com/lambdaclass/ethrex)
+- [Nimbus EL](https://github.com/status-im/nimbus-eth1)
 
 > An Ethereum node has one consensus client and one execution client. Eth Docker can be used to split this between two
 machines, but that distributed setup is rare

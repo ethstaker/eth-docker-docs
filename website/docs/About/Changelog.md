@@ -16,6 +16,44 @@ instead.
 > On 6/21/2025, Eth Docker's repository name changed. Everything should work as it did.
 > If you do wish to manually update your local reference, run `git remote set-url origin https://github.com/ethstaker/eth-docker.git`
 
+
+## v26.4.1 2026-04-19
+
+*This is a recommended release for Vero users*
+
+**Breaking changes**
+- `COMPOSE_FILE` is now a combination of `CORE_FILES` and `CUSTOM_FILES`. If you deploy `.env` via Ansible or via github,
+please adjust your setup to place yml files into `CORE_FILES` for files that may be replaced by an `./ethd config` run, and
+`CUSTOM_FILES` for files that should not be. Note that `CORE_FILES` cannot be empty.
+- `./prometheus/custom-prom.yml` and `./promtail/custom-lokiurl.yml` are gone. If you were remote-writing to your own Metrics store such as Mimir and your
+own logs store such as Loki, please re-create those entries in `./alloy/prometheus-write.alloy` and `./alloy/loki-write.alloy`.
+- Custom scrape targets in `prometheus/conf.d` will no longer be used. Please recreate them in `./alloy/config.d`. You can convert the Prometheus
+custom scrape targets to Alloy's River format with
+`docker run --rm -v ./prometheus/conf.d:/config grafana/alloy:latest convert -f prometheus -o /config/<my-target.alloy> /config/<my-target.yml>`, then
+`sudo chown $(id -u):$(id -g) ./prometheus/conf.d/<my-target.alloy>` the resulting `.alloy` file and bring it to the Alloy folder with
+`cp ./prometheus/conf.d/<my-target.alloy> ./alloy/config.d/`. You can add `alloy-shared.yml` into `CUSTOM_FILES` with `nano .env` and then see that
+your scrape target works in the Alloy UI at `http://<my-node-ip>:12345`.
+
+Changes
+- QUIC is default-enabled for Lodestar
+- Reth snapshot download allows any network, if the user supplied custom parameters in `RETH_SNAPSHOT`
+- Prepare for the next Vero release
+- Start nagging users to upgrade from Debian 11
+- `./ethd config` now offers a list of MEV relays to choose from
+- metrics and logs for Grafana are now collected with Grafana Alloy, no longer with Prometheus and promtail
+- Loki and Tempo can be mapped to host or exposed via traefik, if you want to send logs and traces to them
+from a remote machine
+- `COMPOSE_FILE` is now a combination of `CORE_FILES` and `CUSTOM_FILES`. Put yml files that `./ethd config`
+would never add, such as `siren.yml` or `contributoor.yml`, into `CUSTOM_FILES`. They will then survive an
+`./ethd config` run.
+
+Bug fixes
+- Geth, Besu and SSV now send traces correctly to Tempo
+- Fixed bugs in Lido SDVT Obol config, SSV DKG key generation and Lido CSM key generation
+- Fixed running Eth Docker with rootless Docker. Caveat that rootless is a very limited running mode,
+I do not know how to make P2P ports accessible in that mode.
+
+
 ## v26.4.0 2026-04-12
 
 *This is a recommended release for Reth users*

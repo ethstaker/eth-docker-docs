@@ -15,7 +15,7 @@ Take a look at some [build ideas](../Usage/Hardware.md) and consider clients' [r
 ## Eth Docker QuickStart
 
 For a rapid start, have Ubuntu or Debian Linux installed, and then follow these steps. This has been tested on Debian
-11/12 and Ubuntu 22.04/24.04. 
+LTS and Ubuntu LTS.
 
 > If you are using a version of Debian with a root password set, please install `sudo` as the `root` user with
 > `apt update && apt install sudo git`, then make your non-root user a member of the sudo group with

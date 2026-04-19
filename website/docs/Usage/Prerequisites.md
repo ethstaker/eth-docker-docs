@@ -17,8 +17,8 @@ We highly recommend removing this via `sudo snap remove --purge docker`. Note th
 in Docker. If you are running the snap Docker package and have data you need to keep, please ask for help in the
 ethstaker Discord.
 
-Eth Docker has been tested on Ubuntu 24.04 "Mantic Minotaur", Ubuntu 22.04 "Jammy Jellyfish" and Ubuntu 20.04
-"Focal Fossa". An [LTS](https://wiki.ubuntu.com/Releases), Long Term Support, version of Ubuntu is recommended, either
+Eth Docker has been tested on currently supported Ubuntu LTS releases.
+An [LTS](https://wiki.ubuntu.com/Releases), Long Term Support, version of Ubuntu is recommended, either
 Ubuntu Server or Ubuntu Desktop. If installing Ubuntu Server, make doubly sure to extend the "lv", logical volume, to
 use your entire disk during the install.
 
@@ -51,7 +51,7 @@ If you like, you can also add a docker-compose alias, replacing `MYUSERNAME` wit
 
 ## Debian Prerequisites
 
-Eth Docker has been tested on Debian 11 "Bullseye" and Debian 12 "Bookworm".
+Eth Docker has been tested on currently supported Debian LTS releases.
 
 ### Automatic installation
 
@@ -190,10 +190,11 @@ sudo docker ps
 
 ## rootless Docker
 
-Eth Docker works with [rootless Docker](https://docs.docker.com/engine/security/rootless/).
+Eth Docker is limited with [rootless Docker](https://docs.docker.com/engine/security/rootless/). Containers
+won't start until the user is logged in, and I am unsure how to handle iptables so host-mapped P2P ports work.
 
-If using Grafana, use `grafana-rootless.yml` instead of `grafana.yml`. This omits node-exporter, cadvisor, promtail and
-Loki.
+If using Grafana, use `grafana-rootless.yml` instead of `grafana.yml`. This omits node-exporter and cadvisor.
+
 
 If using traefik, either change its ports in `.env` to be above `1024`, or
 [expose privileged ports](https://docs.docker.com/engine/security/rootless/#exposing-privileged-ports).

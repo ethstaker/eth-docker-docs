@@ -26,7 +26,9 @@ Please choose:
   * Nethermind
   * Geth
   * Erigon
-* Whether to run a grafana dashboard for monitoring
+  * Ethrex
+  * Nimbus EL
+* Whether to run a Grafana dashboard for monitoring
 
 First, copy the environment file.  
 `cp default.env .env`
@@ -37,7 +39,7 @@ which this project does not use.
  
 Then, adjust the contents of `.env`. On Ubuntu Linux, you can run `nano .env`.
 
-- Set the `COMPOSE_FILE` entry depending on the client you are going to run,
+- Set the `CORE_FILES` entry depending on the client you are going to run,
 and with which options. See below for available compose files. Think of this as
 blocks you combine: One consensus client, optionally one execution client, optionally reporting,
 optionally a reverse proxy for https:// access to reporting.
@@ -65,6 +67,9 @@ Choose one consensus client:
 - `nimbus.yml` - Nimbus
 - `lighthouse.yml` - Lighthouse
 - `prysm.yml` - Prysm
+- `grandine-allin1.yml` - Grandine
+- `grandine-plugin-allin1.yml` - Grandine integrated into Nethermind
+- `caplin.yml` - Caplin integrated into Erigon
 
 Choose one execution client:
 
@@ -73,6 +78,8 @@ Choose one execution client:
 - `nethermind.yml` - Nethermind
 - `erigon.yml` - Erigon execution client
 - `geth.yml` - Geth execution client
+- `ethrex.yml` - Ethrex execution client
+- `nimbus-el.yml` - Nimbus execution client
 
 > If you wish to use the built-in Caplin consensus client with Erigon, use `erigon.yml` without a consensus client file,
 and it will use the built-in Caplin consensus client
@@ -92,6 +99,8 @@ not be exposed to the Internet. Used *in addition* to `grafana.yml`, not instead
 `traefik-*.yml` is recommended.
 - `prysm-web-shared.yml` - to map the Prysm web port (default: 3500) to the host. This is not encrypted and should
 not be exposed to the Internet. Using encryption instead via `traefik-*.yml` is recommended.
+
+You can add yml files to `CUSTOM_FILES` if they wouldn't be ever added by `./ethd config`:
 - `siren.yml` - Lighthouse's Siren UI
 
 > See [Prysm Web](../../Usage/WebUI.md) for notes on using the Prysm Web UI
