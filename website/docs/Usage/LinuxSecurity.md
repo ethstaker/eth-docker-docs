@@ -64,7 +64,7 @@ and Administrators. Check "Replace all child object permissions", and click OK. 
 OpenSSH client had.
 
 Lastly, once key authentication has been tested, turn off password authentication. On your Linux server:  
-`sudo nano /etc/ssh/ssh_config.d/99-disable-password-auth.conf`
+`sudo nano /etc/ssh/ssh_config.d/00-disable-password-auth.conf`
 ```
 PasswordAuthentication no
 ```
