@@ -7,8 +7,7 @@ Below are steps for initialising and reproducing this portal for development.
 ## Dependencies
 
 1.  The latest LTS version of [Node](https://nodejs.org/en/download/) installed. 
-    > You have to be on Node >= 20.x. This is the default version on Ubuntu 24.04 "Noble Numbat" or later,
-    and Debian 13 "Trixie" or later.
+    > You have to be on Node >= 22.x.
 
 ## Installation
 
