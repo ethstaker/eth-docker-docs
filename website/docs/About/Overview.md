@@ -1,11 +1,10 @@
 ---
 slug: /
-title: High Level Overview.
+title: About Eth Docker
 sidebar_position: 1
 sidebar_label: Overview
 ---
 
-## This project
 
 Eth Docker aims to make running an Ethereum staking full node simpler than setting everything up manually,
 while allowing the user choice when it comes to the exact client mix they wish to run. It's the "easy button" for home stakers,
