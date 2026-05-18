@@ -90,6 +90,77 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plu
 
 You know it was successful when you saw messages scrolling past that install docker and docker compose.
 
+```
+## Arch Linux Prerequisites
+
+Eth Docker has been tested on Arch Linux with the following setup.
+
+> Arch Linux uses `pacman` as its package manager. The following
+> steps differ from Ubuntu/Debian-based installations.
+
+### Manual installation
+
+Install Docker, Docker Compose, and git:
+
+```
+sudo pacman -S docker docker-compose git
+```
+
+Enable and start the Docker service:
+
+```
+sudo systemctl enable docker
+sudo systemctl start docker
+```
+
+Add your user to the docker group to run Docker without sudo:
+
+```
+sudo usermod -aG docker $USER
+
+```
+
+> Log out and back in after adding yourself to the docker group,
+> or run `newgrp docker` to apply changes in the current session.
+
+Clone the project: `git clone https://github.com/ethstaker/eth-docker.git && cd eth-docker`
+
+You know it was successful when `docker run hello-world` completes
+without errors.
+
+### Known Issues on Arch Linux
+
+**DNS Resolution in Containers:**
+Arch Linux uses `systemd-resolved` which can conflict with
+Docker's internal DNS, especially on networks with restrictive
+DNS policies (e.g. public WiFi). Containers may fail to resolve
+external domains even when the host resolves them correctly.
+
+Fix: Add explicit DNS servers to each service in
+`docker-compose.yml`:
+
+```yaml
+dns:
+  - 8.8.8.8
+  - 1.1.1.1
+```
+
+**Docker Volume Permissions:**
+Docker-owned volumes may cause `Permission denied` errors
+during git operations. Fix by correcting ownership:
+
+```
+sudo chown -R $USER:$USER ./
+```
+
+And ensure your data directories are listed in `.gitignore`:
+
+```
+geth-data/
+lighthouse-data/
+```
+```
+
 ## Generic Linux
 
 Other distributions are expected to work as long as they support git, Docker, and Docker Compose.
