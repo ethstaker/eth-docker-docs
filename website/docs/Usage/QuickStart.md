@@ -17,29 +17,51 @@ Take a look at some [build ideas](../Usage/Hardware.md) and consider clients' [r
 For a rapid start, have Ubuntu or Debian Linux installed, and then follow these steps. This has been tested on Debian
 LTS and Ubuntu LTS.
 
-> If you are using a version of Debian with a root password set, please install `sudo` as the `root` user with
-> `apt update && apt install sudo git`, then make your non-root user a member of the sudo group with
-> `usermod -aG sudo <username>`.
+<details>
+<summary>If you are using a version of Debian with a root password set</summary>
 
-> If you are using a minimal version of Ubuntu or Debian, please install `git` with `sudo apt update && sudo apt install git`
+please install `sudo` as the `root` user with
+
+```bash
+apt update && apt install sudo -y
+```
+
+then make your non-root user a member of the sudo group with
+
+```bash
+usermod -aG sudo <username>
+```
 
 Eth Docker needs to be installed while logged into a user account other than `root`, for security purposes.
+</details>
+
+Make sure `git` is installed
+
+```bash
+sudo apt update && sudo apt install git -y
+```
+
+
 
 Download Eth Docker
-
-`cd ~ && git clone https://github.com/ethstaker/eth-docker.git && cd eth-docker`
+```bash
+cd ~ && git clone https://github.com/ethstaker/eth-docker.git && cd eth-docker
+```
 
 Install pre-requisites such as Docker
-
-`./ethd install`
+```bash
+./ethd install
+```
 
 Configure Eth Docker - have an Ethereum address handy where you want Execution Layer rewards to go
-
-`./ethd config`
+```bash
+./ethd config
+```
 
 Start Eth Docker
-
-`./ethd up`
+```bash
+./ethd up
+```
 
 The same script can also be used to stop, start and update the node. Run `./ethd` for a help screen.
 
