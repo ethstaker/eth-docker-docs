@@ -7,13 +7,18 @@ sidebar_label: Dashboards
 ## Choose local or cloud Grafana
 
 You have a choice of running Grafana locally, by including `grafana.yml`, or in the cloud, with `grafana-cloud.yml`.
-If you choose Grafana Cloud, you **must** edit `./alloy/prometheus-write.alloy` as well as `./alloy/loki-write.alloy`
-and add your cloud remote write credentials. This can also be used to write to a central Grafana stack of your own,
-rather than a hosted cloud offering.
 
-`grafana-cloud.yml` runs a local Alloy but no local Grafana, and enables adding custom Alloy config items.
+### Grafana Cloud Configuration
 
-If you want to add additional scrape targets, place these into `./alloy`.
+If you choose Grafana Cloud, you **must** edit `./alloy/prometheus-write.alloy` as well as `./alloy/loki-write.alloy` and add your cloud remote write credentials. This can also be used to write to a central Grafana stack of your own, rather than a hosted cloud offering.
+
+1. **Metrics**: Edit `./alloy/prometheus-write.alloy`, uncomment `prometheus.remote_write.remote_prometheus.receiver` in the `forward_to` array, and update the `remote_prometheus` block with your Grafana Cloud Mimir endpoint and credentials.
+2. **Logs**: Edit `./alloy/loki-write.alloy`, uncomment `loki.write.remote_loki.receiver` in the `forward_to` array, and update the `remote_loki` block with your Grafana Cloud Loki endpoint and credentials.
+3. **Traces (Important)**: The default `./alloy/alloy-logs.alloy` is configured to send traces to a local `tempo` service. However, `grafana-cloud.yml` does **not** include a local Tempo container. If left unchanged, Alloy will fail to start with a `"no children to pick from"` error. You have two options:
+   - **Option A (Recommended)**: Comment out the `tracing` and `otelcol.exporter.otlp "tempo"` blocks in `./alloy/alloy-logs.alloy` if you only need metrics and logs.
+   - **Option B**: Update the `otelcol.exporter.otlp "tempo"` block to point to your Grafana Cloud Tempo endpoint. **Note:** The `auth` parameter inside the `client` block must be an **attribute** (`auth = otelcol.auth.basic.grafana_cloud.handler`), not a block (`auth { ... }`). Using a block will cause a syntax error.
+
+`grafana-cloud.yml` runs a local Alloy but no local Grafana, and enables adding custom Alloy config items. If you want to add additional scrape targets, place these into `./alloy`.
 
 ## Local Grafana dashboards
 
