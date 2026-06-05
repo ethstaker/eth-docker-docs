@@ -159,7 +159,6 @@ And ensure your data directories are listed in `.gitignore`:
 geth-data/
 lighthouse-data/
 ```
-```
 
 ## Generic Linux
 
