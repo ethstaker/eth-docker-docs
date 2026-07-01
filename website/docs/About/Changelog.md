@@ -17,6 +17,31 @@ instead.
 > If you do wish to manually update your local reference, run `git remote set-url origin https://github.com/ethstaker/eth-docker.git`
 
 
+## v26.7.1 2026-07-01
+
+*This is a mandatory release for users of Erigon, and recommended for everyone else*
+
+**Breaking changes**
+- Requires Erigon `v3.5.0` or later
+- Requires Teku `v26.7.0` or later
+
+Changes
+- Support Erigon `v3.5.0` and later
+- Support QUIC ports (UDP) in Teku `v26.7.0`. Be sure to allow these ports in through firewall/port forwarding!
+- Nimbus Verified Proxy supports comma-separated `RPC_URLS`
+- Broader support for comma-separated fallback nodes in `CL_NODE`, for Teku, `./ethd keys send-exit|count`, ethdo, and Lighthouse legacy validator exit
+- New CL node type `blob-archive`, separate from `archive`. Not all CLs can be a `blob-archive`, and there is currently no good way
+to fetch historical blobs
+- CL node type `pruned-with-zkproofs` becomes EL node type `use-cl-zkproofs`. This remains highly experimental, and will not be broadly
+supported until earliest Hegotá hardfork in 2027
+- Remove `clef` from Geth source build: The tool moved to its own repo
+- Warn users if they use Traefik and it is older than `v3.6.1` and doesn't support current Docker CE releases
+
+Bug fixes
+- Remove check for `validator-keys` service. It would sporadically fail, root cause unknown but likely somewhere in Docker Compose
+- Create the backup file for `tempo.yaml` as the directory owner, never as `root`
+- Fix a regression introduced in `v26.7.0` that would fail liveness checks for `CL_NODE`
+
 ## v26.6.1 2026-06-20
 
 *This is an optional release*
