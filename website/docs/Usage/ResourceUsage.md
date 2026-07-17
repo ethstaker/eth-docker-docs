@@ -40,7 +40,7 @@ DB Size is shown with values for different types of nodes: Full, and different l
 | Reth | 2.1.0 | April 2026 | ~1.8 TiB | ~1 TiB  | ~475 GiB | ~490 GiB | ~248 GiB | ~14 GiB | with receipts, exception "Aggressive" |
 | Erigon | 3.3.8 | February 2026 | ~1.0 TiB | ~650 GiB | n/a | ~640 GiB | ~355 GiB | ~18 GiB | Erigon will use available system RAM, but the OS will use it for other processes as needed |
 | Nimbus | 0.1.0-alpha | May 2025 | tbd | ~755 GiB | n/a | n/a | n/a | tbd | With Era1 import |
-| Ethrex | 10.0.0-rc.1 | March 2026 | n/a | ~300 GiB | n/a | n/a | n/a | ~16 GiB | |
+| Ethrex | 21.0.0 | July 2026 | n/a | ~280 GiB | n/a | n/a | n/a | ~17 GiB | ~30 GiB while snap syncing |
 
 Notes on disk usage
 - All clients other than "Nethermind with HalfPath DB" continously prune state
@@ -63,7 +63,7 @@ Cache size default in all tests.
 | Reth  | 2.1.0 | April 2026 | Full | Legacy miniPC | ~ 17 days | full sync, no snapshot |
 | Reth  | 2.0.0 | April 2026 | post-Prague | Netcup RS G11 | ~ 2 hours  | with DB snapshot |
 | Nimbus | 0.1.0-alpha | May 2025 | Full | OVH Baremetal NVME | ~ 5 1/2 days | With Era1 import |
-| Ethrex | 10.0.0-rc.1 | March 2026 | post-merge | Netcup RS G11 | ~ 2 hours | |
+| Ethrex | 21.0.0 | July 2026 | post-merge | VM | ~ 3 hours | |
 
 ## Test Systems
 
@@ -83,6 +83,7 @@ Servers have been configured with [noatime](https://www.howtoforge.com/reducing-
 | [OVH](https://ovhcloud.com/) Baremetal NVMe   | 32 GiB | 1.9 TB  | Intel Hexa | 150us max | Datacenter-class NVMe drive |
 | [Netcup](https://netcup.eu) RS G11 | 96 GiB | 3 TB | 20 vCPU on an AMD 84-core | 400us avg / 1.1ms max | Storage is fast enough to attest, but too slow to get best rewards |
 | Legacy miniPC | 32 GiB | 2 TB | Intel Quad 6th gen | 230 us avg / 320 us max | Home staker setup with PCIe 3 NVMe and older CPU |
+| VM | 32-48 GiB | 2TB | Intel Quad 8th gen | 170 us avg / 290 us max | VM with pass-through Intel DC NVMe |
 
 ## Getting better latency
 
