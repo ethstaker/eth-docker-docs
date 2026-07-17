@@ -11,7 +11,7 @@ read these yet, please do so now. You need to know how to guard your keystore pa
 
 ## Create keys
 
-For mainnet, best practice is to create keys using a Linux Live USB and the official [staking-deposit-cli](https://github.com/ethereum/staking-deposit-cli). I have a [YouTube walkthrough](https://www.youtube.com/watch?v=oDELXYNSS5w) for this process. Make sure to safeguard your mnemonic and only ever keep it offline! In steel and in a safe is best.
+For mainnet, best practice is to create keys using a Linux Live USB and the official [staking-deposit-cli](https://github.com/ethstaker/ethstaker-deposit-cli). I have a [YouTube walkthrough](https://www.youtube.com/watch?v=oDELXYNSS5w) for this process. Make sure to safeguard your mnemonic and only ever keep it offline! In steel and in a safe is best.
 
 ### You want to create keys with Eth Docker
 
