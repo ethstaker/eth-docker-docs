@@ -40,7 +40,7 @@ DB Size is shown with values for different types of nodes: Full, and different l
 | Reth | 2.1.0 | April 2026 | ~1.8 TiB | ~1 TiB  | ~475 GiB | ~490 GiB | ~248 GiB | ~14 GiB | with receipts, exception "Aggressive" |
 | Erigon | 3.3.8 | February 2026 | ~1.0 TiB | ~650 GiB | n/a | ~640 GiB | ~355 GiB | ~18 GiB | Erigon will use available system RAM, but the OS will use it for other processes as needed |
 | Nimbus | 0.1.0-alpha | May 2025 | tbd | ~755 GiB | n/a | n/a | n/a | tbd | With Era1 import |
-| Ethrex | 21.0.0 | July 2026 | n/a | ~280 GiB | n/a | n/a | n/a | ~17 GiB | ~30 GiB while snap syncing |
+| Ethrex | 21.0.0 | July 2026 | n/a | ~500 GiB | n/a | n/a | n/a | ~17 GiB | ~30 GiB RAM while snap syncing. DB excludes historical receipts: Don't use with RocketPool, SSV, NodeSet |
 
 Notes on disk usage
 - All clients other than "Nethermind with HalfPath DB" continously prune state
