@@ -17,6 +17,32 @@ instead.
 > If you do wish to manually update your local reference, run `git remote set-url origin https://github.com/ethstaker/eth-docker.git`
 
 
+## v26.7.2 2026-07-22
+
+*This is a recommended release for users of Nethermind, Nimbus EL and Nimbus archive node, and optional for everyone else*
+
+**Breaking changes**
+- Requires Nethermind `v1.37.1` or later (recommended: `v1.39.2` or later)
+
+Changes
+- Enable Nethermind's log index by default
+- Replace "beaconstate.info" checkpoint URLs
+- Support Nimbus Unified client
+- Nimbus archive node supports EraC download; warns user to use EraC when not genesis syncing
+- Support podman, see https://ethdocker.com/Usage/Prerequisites#podman
+- Track Eth Docker version in metrics, and allow restricting Alloy scraping to one instance of Eth Docker. Thanks @erl-100!
+- Improve custom network support, support current Glamsterdam devnet format for metadata. Support custom networks with Caplin
+- Nimbus EL default tag changes to `latest`, and both `master` and `latest` will build
+- Lighthouse and Reth source builds cache Rust artefacts 
+- Prysm source build uses `make`, not `bazel`
+- Remove GitPOAP badge 😭
+
+Bug fixes
+- Nimbus EL logs are being collected
+- Grandine plugin supports Graffiti with spaces
+- Nimbus resync works when not using checkpoint sync
+- Lighthouse source build always uses clang
+
 ## v26.7.1 2026-07-01
 
 *This is a mandatory release for users of Erigon, and recommended for everyone else*
