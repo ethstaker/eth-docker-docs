@@ -351,6 +351,64 @@ and verify it's 5.x or higher.
 [Asahi Linux](https://asahilinux.org/) on Apple Silicon Macs or
 [Debian Linux](https://wiki.debian.org/InstallingDebianOn/Apple) on Intel x64 Macs.
 
+## podman
+
+Podman is expected to work from Podman `v6.0` on. Networking needs to be changed so that P2P connections work.
+> NB: Podman only works with IPv4. IPv4/IPv6 dual-stack is not supported. This means it is not well suited for nodes behind CGNAT.
+
+Install Podman and `crun`. `crun`, not `runc`. `runc` in Debian is vulnerable and will not be updated for Trixie and earlier  
+`sudo apt update && sudo apt install podman crun`
+
+Add alias and env vars to the end of `~/.profile`
+```
+cat <<EOF >>~/.profile
+export DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
+export DOCKER_HOST=unix:///run/user/$(id -u)/podman/podman.sock
+export PODMAN_COMPOSE_WARNING_LOGS=false
+alias docker=podman
+EOF
+```
+
+Activate  
+`source ~/.profile`
+
+Change podman to use pasta's experimental pesto port forwarder, so the CL can get peers.
+
+```
+mkdir -p ~/.config/containers
+nano ~/.config/containers/containers.conf
+```
+then
+```
+[network]
+rootless_port_forwarder="pasta"
+```
+
+Test:
+```
+systemctl --user start dbus
+podman info
+echo $DOCKER_CONFIG
+```
+
+Download docker compose plugin
+
+```
+mkdir -p "$DOCKER_CONFIG"/cli-plugins
+curl -sSL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 \
+  -o $DOCKER_CONFIG/cli-plugins/docker-compose
+chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
+```
+
+Test  
+`podman compose version`
+
+Enable podman socket  
+`systemctl --user enable --now podman.socket`
+
+Confirm socket connection  
+`podman info | grep -iA2 socket`
+
 ## Windows 11
 
 It is technically possible to run Eth Docker on [Windows 11](../Support/Windows.md).
