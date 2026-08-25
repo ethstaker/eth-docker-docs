@@ -17,6 +17,36 @@ instead.
 > If you do wish to manually update your local reference, run `git remote set-url origin https://github.com/ethstaker/eth-docker.git`
 
 
+## v26.8.2 2026-08-29
+
+*This is a required release for users of Nimbus*
+
+**Security**
+- Update transitive dependencies in `traefik-utils/app`, fixing vulnerabilities. None of these vulnerabilities were reachable in Eth Docker code. Thanks to @begininvoke!
+  urllib3==2.5.0:
+    - PYSEC-2026-141
+    - PYSEC-2026-1994
+    - PYSEC-2026-1996
+    - PYSEC-2026-1998
+  idna==3.10:
+    - PYSEC-2026-215
+
+**Breaking** changes
+- Requires Nimbus `v26.8.0` or later
+
+Changes
+- Support QUIC for Nimbus
+- Replace Bloxroute max-profit relay, which has been shut down, with regulated, during `./ethd config`. Eth Docker will not touch the relays you already have
+configured; adjust those yourself
+- Add `custom` `EL_NODE_TYPE`. Uses the client default for database layout, sync mode and expiry, and let's you adjust those via `EL_EXTRAS`
+- On RiscV, offer Ethrex during `./ethd config`
+- Source builds for Prysm, Erigon and MEV Boost use Go 1.27
+
+Bug fixes
+- Remove a leftover second host-mapped P2P port from Besu
+- Fix `./ethd version` for `commit-boost-pbs`
+- Add log level to Teku VC
+
 ## v26.8.1 2026-08-20
 
 *This is a required release for users of Besu, and optional for everyone else*
