@@ -308,7 +308,8 @@ sudo docker ps
 ## rootless Docker
 
 Eth Docker works with [rootless Docker](https://docs.docker.com/engine/security/rootless/) since version 29.5.0.
-IPv4/IPv6 dual-stack works in rootless mode in testing.
+IPv4/IPv6 dual-stack works in rootless mode in testing.  
+Restarting services automatically on boot is supported.
 
 To make sure that P2P traffic on the CL and EL works, including incoming peers, and the services start after reboot
 without the user logging in, install it like this:
@@ -333,8 +334,10 @@ If using traefik, either change its ports in `.env` to be above `1024`, or
 
 `ufw`, if installed, will control all ports when in rootless mode. Be sure to allow the P2P ports in, UDP and TCP both.
 
-From Docker `29.8.0`, the experimental `pesto` port driver is supported, if initally in IPv4-only mode. Edit your service
-file for `dockerd` and add environment variables:
+From Docker `29.8.0`, the experimental `pesto` port driver is supported, if initally in IPv4-only mode. You will need `passt`
+`2026_05_07` or later. See [pasta notes](#pasta-notes).
+
+If you want to experiment with pasta/pesto, edit your service file for `dockerd` and add environment variables:
 
 ```
 Environment=DOCKERD_ROOTLESS_ROOTLESSKIT_NET=pasta
@@ -343,8 +346,10 @@ Environment=DOCKERD_ROOTLESS_ROOTLESSKIT_PORT_DRIVER=pesto
 
 ## podman
 
-Podman works from Podman `v6.0` on. Podman `v6.1` and later supports IPv4/IPv6 dual-stack.
-Networking needs to be changed so that P2P connections work.
+Podman works from Podman `v6.0` on. Podman `v6.1` and later supports IPv4/IPv6 dual-stack with `passt` package `2026_07_28` or later.
+See [pasta notes](#pasta-notes).  
+Networking needs to use pasta/pesto so that P2P connections work.  
+Restarting services automatically on boot requires additional scripting with podman `v6.1`.
 
 Install Podman and `crun` or `runc`. On Debian choose `crun`, not `runc`. `runc` in Debian is vulnerable and will not be updated for Trixie and earlier
 ```sh
@@ -408,6 +413,19 @@ Confirm socket connection
 ```sh
 podman info | grep -iA2 socket
 ```
+
+## pasta notes
+
+Podman and optionally Docker rootless use the pasta/pesto driver in the `passt` package to preserve the source IP
+of incoming connections, which is required for the CL to have stable peering. `passt` is very much still in flux,
+and the version that ships with the OS will often not be the version that is required for stable operation.
+
+Check your distribution's `passt` package with `apt list | grep passt`. If it's older than what you need, you could instead
+manually install [`.deb` packages](https://passt.top/builds/latest/x86_64/) and keep them up to date manually.
+
+You can check installed versions with `passt --version` and `pasta --version`.
+
+Docker rootless does not use pasta/pesto by default, and so side-steps this requirement.
 
 ## macOS Prerequisites
 
