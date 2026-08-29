@@ -333,30 +333,20 @@ If using traefik, either change its ports in `.env` to be above `1024`, or
 
 `ufw`, if installed, will control all ports when in rootless mode. Be sure to allow the P2P ports in, UDP and TCP both.
 
-## macOS Prerequisites
+From Docker `29.8.0`, the experimental `pesto` port driver is supported, if initally in IPv4-only mode. Edit your service
+file for `dockerd` and add environment variables:
 
-> The following prerequisites apply if you are going to use macOS as a server to run an Ethereum staking full node. If
-you use macOS to connect *to* a node server, all you need is an SSH client.
-
-- Install [OrbStack](https://orbstack.dev/), e.g. with `brew install orbstack`
-- As an alternative to Orbstack, you could install [Docker Desktop](https://www.docker.com/products/docker-desktop) and
-allocate 16+ GiB of RAM and 3TB or so of storage space to it, in Preferences->Resources->Advanced. Unlike OrbStack,
-Docker Desktop does not dynamically allocate memory and disk space, and it can be temperamental depending on release.
-- Install prerequisites via homebrew: `brew install coreutils newt bash gawk`
-- You may need to log out and back into your terminal session to have the right version of bash. Try `bash --version`
-and verify it's 5.x or higher.
-- Verify git is installed with `git --version`. It will show a Desktop prompt to install it if it isn't.
-
-> An arguably easier path could be to keep macOS just for firmware updates and dual-boot into
-[Asahi Linux](https://asahilinux.org/) on Apple Silicon Macs or
-[Debian Linux](https://wiki.debian.org/InstallingDebianOn/Apple) on Intel x64 Macs.
+```
+Environment=DOCKERD_ROOTLESS_ROOTLESSKIT_NET=pasta
+Environment=DOCKERD_ROOTLESS_ROOTLESSKIT_PORT_DRIVER=pesto
+```
 
 ## podman
 
-Podman is expected to work from Podman `v6.0` on. Networking needs to be changed so that P2P connections work.
-> NB: Podman only works with IPv4. IPv4/IPv6 dual-stack is not supported. This means it is not well suited for nodes behind CGNAT.
+Podman works from Podman `v6.0` on. Podman `v6.1` and later supports IPv4/IPv6 dual-stack.
+Networking needs to be changed so that P2P connections work.
 
-Install Podman and `crun`. `crun`, not `runc`. `runc` in Debian is vulnerable and will not be updated for Trixie and earlier  
+Install Podman and `crun` or `runc`. On Debian choose `crun`, not `runc`. `runc` in Debian is vulnerable and will not be updated for Trixie and earlier
 `sudo apt update && sudo apt install podman crun`
 
 Add alias and env vars to the end of `~/.profile`
@@ -369,7 +359,7 @@ alias docker=podman
 EOF
 ```
 
-Activate  
+Activate
 `source ~/.profile`
 
 Change podman to use pasta's experimental pesto port forwarder, so the CL can get peers.
@@ -400,14 +390,32 @@ curl -sSL https://github.com/docker/compose/releases/latest/download/docker-comp
 chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
 ```
 
-Test  
+Test
 `podman compose version`
 
-Enable podman socket  
+Enable podman socket
 `systemctl --user enable --now podman.socket`
 
-Confirm socket connection  
+Confirm socket connection
 `podman info | grep -iA2 socket`
+
+## macOS Prerequisites
+
+> The following prerequisites apply if you are going to use macOS as a server to run an Ethereum staking full node. If
+you use macOS to connect *to* a node server, all you need is an SSH client.
+
+- Install [OrbStack](https://orbstack.dev/), e.g. with `brew install orbstack`
+- As an alternative to Orbstack, you could install [Docker Desktop](https://www.docker.com/products/docker-desktop) and
+allocate 16+ GiB of RAM and 3TB or so of storage space to it, in Preferences->Resources->Advanced. Unlike OrbStack,
+Docker Desktop does not dynamically allocate memory and disk space, and it can be temperamental depending on release.
+- Install prerequisites via homebrew: `brew install coreutils newt bash gawk`
+- You may need to log out and back into your terminal session to have the right version of bash. Try `bash --version`
+and verify it's 5.x or higher.
+- Verify git is installed with `git --version`. It will show a Desktop prompt to install it if it isn't.
+
+> An arguably easier path could be to keep macOS just for firmware updates and dual-boot into
+[Asahi Linux](https://asahilinux.org/) on Apple Silicon Macs or
+[Debian Linux](https://wiki.debian.org/InstallingDebianOn/Apple) on Intel x64 Macs.
 
 ## Windows 11
 
