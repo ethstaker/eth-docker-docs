@@ -33,9 +33,9 @@ DB Size is shown with values for different types of nodes: Full, and different l
 | Client | Version | Date | DB Full | DB Post-Merge | DB Rolling | RAM | Notes |
 |--------|---------|------|---------|---------------|------------|-----|-------|
 | Geth   | 1.17.2 | April 2026 | ~1.2 TiB | ~830 GiB | n/a | ~ 8 GiB | |
-| Nethermind | 1.36.2 | April 2026 | ~1.1 TiB | ~740 GiB | ~240 GiB | ~7 GiB | With HalfPath, can automatic online prune at ~350 GiB free |
-| Nethermind | 1.37.1 | April 2026 | ~1.4 TiB | ~1 TiB  | ~255 GiB | ~10 GiB | With FlatInTrie FlatDB |
-| Nethermind | 1.37.1 | April 2026 | ~1.5 TiB | ~1.1 TiB | ~310 GiB | ~15 GiB | With Flat FlatDB |
+| Nethermind | 1.36.2 | April 2026 | ~1.1 TiB | ~740 GiB | ~550 GiB | ~7 GiB | w/ LogIndex; HalfPath DB, can automatic online prune at ~350 GiB free |
+| Nethermind | 1.37.1 | April 2026 | ~1.4 TiB | ~1 TiB  | ~255 GiB | ~10 GiB | w/o LogIndex; FlatInTrie FlatDB |
+| Nethermind | 1.37.1 | April 2026 | ~1.5 TiB | ~1.1 TiB | ~310 GiB | ~15 GiB | w/o LogIndex; Flat FlatDB |
 | Besu | v26.8.0 | August 2026 | ~1.5 TiB | ~1.1 TiB | ~430 GiB | ~10 GiB | |
 | Reth | 2.5.1 | August 2026 | ~1.8 TiB | ~1 TiB | ~400 GiB | ~14 GiB | with receipts |
 | Erigon | 3.6.0 | August 2026 | ~1.0 TiB | ~650 GiB | ~590 GiB | ~18 GiB | Erigon will use available system RAM, but the OS will use it for other processes as needed |
