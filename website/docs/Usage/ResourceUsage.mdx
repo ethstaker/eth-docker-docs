@@ -28,19 +28,19 @@ SSD and RAM use is after initial sync, when keeping up with head.
 Please pay attention to the Version and Date. These are snapshots in time of client behavior. Initial database size increases over time, and execution clients are always working on improving their storage engines.
 
 DB Size is shown with values for different types of nodes: Full, and different levels of expiry: Post-Merge history only; rolling expiry for `33_024` epochs.
-"tbd" means I haven't gathered the data. "n/a" means the client does not support this expiry mode, yet.
+"tbd" means I haven't gathered the data. "n/a" means the client does not support this expiry mode, yet. ">1.8 TiB" means I ran out of space on my test node.
 
 | Client | Version | Date | DB Full | DB Post-Merge | DB Rolling | RAM | Notes |
 |--------|---------|------|---------|---------------|------------|-----|-------|
-| Geth   | 1.17.2 | April 2026 | ~1.2 TiB | ~830 GiB | n/a | ~ 8 GiB | |
+| Geth   | 1.17.5 | September 2026 | ~tbd TiB | ~1.3 TiB | n/a | ~ 8 GiB | |
 | Nethermind | 2.0.0 | September 2026 | ~tbd TiB | ~1.1 TiB | ~400 GiB | ~7 GiB | HalfPath DB, can automatic online prune at ~350 GiB free |
 | Nethermind | 2.0.0 | September 2026 | ~tbd TiB | ~tbd TiB  | ~550 GiB | ~5 GiB | FlatInTrie FlatDB |
 | Nethermind | 2.0.0 | September 2026 | ~tbd TiB | ~tbd TiB | ~480 GiB | ~9 GiB | Flat FlatDB |
-| Besu | v26.8.0 | August 2026 | ~1.5 TiB | ~1.1 TiB | ~430 GiB | ~10 GiB | |
-| Reth | 2.5.1 | August 2026 | ~1.8 TiB | ~1 TiB | ~400 GiB | ~14 GiB | with receipts |
-| Erigon | 3.6.0 | August 2026 | ~1.0 TiB | ~650 GiB | ~590 GiB | ~18 GiB | Erigon will use available system RAM, but the OS will use it for other processes as needed |
-| Nimbus | 0.4.0 | August 2026 | tbd | ~755 GiB | tbd | tbd | |
-| Ethrex | 21.0.0 | July 2026 | n/a | ~500 GiB | n/a | ~17 GiB | ~30 GiB RAM while snap syncing. DB excludes historical receipts: Don't use with RocketPool, SSV, NodeSet |
+| Besu | v26.8.1 | September 2026 | ~tbd TiB | ~1.1 TiB | ~430 GiB | ~10 GiB | |
+| Reth | 2.5.2 | September 2026 | ~1.8 TiB | ~1.2 TiB | ~400 GiB | ~14 GiB | with receipts |
+| Erigon | 3.6.0 | September 2026 | ~tbd TiB | ~tbd GiB | ~590 GiB | ~18 GiB | Erigon will use available system RAM, but the OS will use it for other processes as needed |
+| Nimbus | 0.4.0 | September 2026 | tbd TiB | ~tbd TiB | tbd GiB | tbd | |
+| Ethrex | 26.0.0 | September 2026 | tbd TiB | ~tbd TiB | n/a | ~17 GiB | ~30 GiB RAM while snap syncing. With history backfill. Full node is only back to Byzantium |
 
 Notes on disk usage
 - All clients other than "Nethermind with HalfPath DB" continously prune state
