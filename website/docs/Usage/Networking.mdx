@@ -23,7 +23,10 @@ values to use for default gateway and DNS.
 
 ## Port forwarding
 
-By default, the clients use UDP/TCP 30303 and UDP/TCP 9000 as their P2P, "Peer to Peer", ports. These should be "open to Internet". If you're on a home network, set up [port forwarding](https://portforward.com/) on your router for these. If you are behind CGNAT from your ISP, this will not work. To verify, look at the WAN IP of your router and at https://www.whatismyip.com/. If they match, you are not behind CGNAT. If they don't, you are. Ask your ISP for a static IP address to resolve this.
+By default, the clients use UDP/TCP 30303 (execution layer) and UDP 9000 / UDP 9001 (consensus layer) as their P2P, "Peer to Peer", ports. These should be "open to Internet".
+If you're on a home network, set up [port forwarding](https://portforward.com/) on your router for these. If you are behind CGNAT from your ISP, this will not work. To verify,
+look at the WAN IP of your router and at https://www.whatismyip.com/. If they match, you are not behind CGNAT. If they don't, you are. Use IPV6 dual-stack and/or ask your ISP
+for a static (fully public) IPv4 address to resolve this.
 
 ## Firewalling
 

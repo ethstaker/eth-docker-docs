@@ -6,19 +6,20 @@ sidebar_label: History and Pruning
 
 ## Types of nodes
 
-You can run an Archive node, with all history and full lookup for all historical transactions. This may take large amounts of space, depending on the execution layer client.
+You can run an Archive node, with all history and full lookup for all historical transactions. This needs at least a 4TB drive, and may need as much as 12TB, depending on the type of archive
+and whether you are also archiving blobs.
 
 You can run a Full node, with all history and limited lookup for historical transactions. This fits into a 4TB drive and is often the choice for RPC nodes.
 
-You can run an Expired node, with pre-merge history and receipts gone. This fits into a 2TB drive and is often the choice for validator nodes. This is the default.
+You can run an Expired node, with rolling expiry history and receipts gone. This fits into a 2TB drive and is often the choice for validator nodes. This is the default.
 
 This is controlled by variables in `.env`, which can be set with `nano .env`. Switching from one type to another often requires a full resync.
 
 `EL_NODE_TYPE` can be one of:
 - `archive`
 - `full`
-- `pre-merge-expiry` - the default
 - `rolling-expiry` - keeps ~5 months of history
+- `pre-merge-expiry` - history since the merge, narrowly fits into 2TB but may soon need a 4TB drive
 - `custom` - use whatever expiry and database configuration the client defaults to, and set additional parameters via `EL_EXTRAS` in `.env`
 
 Please be careful with expiry options: Expired history also means expired receipts, which can throw protocols such as SSV and Stakewise for a loop. Both work with pre-merge-expiry, but will likely break with rolling expiry, unless they get receipts from another (unexpired) RPC endpoint.

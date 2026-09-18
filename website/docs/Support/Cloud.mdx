@@ -147,12 +147,13 @@ to the actual defaults by adding more specific rules. For the Docker default sub
 ## Allowing IPv6 traffic
 
 Ports mapped to host by Docker are reachable on IPv4 by default without the need for ufw rules. This is not true for IPv6 in
-my testing. You can use a [port scanner](https://www.ipvoid.com/port-scan/) to test your P2P TCP ports - defaults `30303` and `9000` -
+my testing. You can use a [port scanner](https://www.ipvoid.com/port-scan/) to test your P2P TCP ports - default `30303` on the execution layer -
 on IPv6. If they are `Filtered` instead of `Open`, add explicit rules for P2P. Adjust this to the ports you actually use!!
 
 ```
 sudo ufw allow from any to any port 30303
-sudo ufw allow from any to any port 9000
+sudo ufw allow proto udp from any to any port 9000
+sudo ufw allow proto udp from any to any port 9001
 ```
 
 ## Allowing Docker traffic to the host IP
