@@ -20,9 +20,10 @@ This is controlled by variables in `.env`, which can be set with `nano .env`. Sw
 - `full`
 - `rolling-expiry` - keeps ~5 months of history
 - `pre-merge-expiry` - history since the merge, narrowly fits into 2TB but may soon need a 4TB drive
+- `stakewise-expiry` - history as required by Stakewise. For all but Nethermind and Reth, this is a variant of rolling-expiry. If the operator DB is reset, an EL that uses Stakewise-specific rolling expiry will need to be resynced as well.
 - `custom` - use whatever expiry and database configuration the client defaults to, and set additional parameters via `EL_EXTRAS` in `.env`
 
-Please be careful with expiry options: Expired history also means expired receipts, which can throw protocols such as SSV and Stakewise for a loop. Both work with pre-merge-expiry, but will likely break with rolling expiry, unless they get receipts from another (unexpired) RPC endpoint.
+Please be careful with expiry options: Expired history also means expired receipts, which can throw protocols such as SSV for a loop. SSV works with pre-merge-expiry, but will likely break with rolling expiry, unless they get receipts from another (unexpired) RPC endpoint.
 
 `CL_NODE_TYPE` can be one of:
 - `archive`
