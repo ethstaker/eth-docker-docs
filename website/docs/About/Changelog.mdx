@@ -16,6 +16,42 @@ instead.
 > On 6/21/2025, Eth Docker's repository name changed. Everything should work as it did.
 > If you do wish to manually update your local reference, run `git remote set-url origin https://github.com/ethstaker/eth-docker.git`
 
+## v26.11.1 2026-11-25
+
+*This is a recommended release for Teku, Prysm and Lido DVT users, and optional otherwise*
+
+**Manual intervention needed if coming from v26.7.2-dev through v26.9.0-dev**
+
+If you are updating from an Eth Docker version (check with `./ethd version`) of `v26.7.2-dev` up to `v26.9.0-dev`, and you use `grafana.yml` or `grafana-cloud.yml`, you   may have a directory that was incorrectly created with `root` ownership. In this case, `./ethd update` would fail with an unsubtle error
+To fix this manually, `cd ~/eth-docker` or into the directory where you have Eth Docker installed, then `sudo rm -rf ./prometheus/node-exporter-text`
+After that you can safely run `./ethd update`
+
+**Deprecations**
+- The legacy `validator-exit` service for Lighthouse, Lodestar, Nimbus, Prysm and Teku is deprecated and support will be removed after Hegotá hardfork. Please switch your tooling  to use `./ethd keys sign-exit` and `./ethd keys send-exit` instead
+- Nethermind's legacy Patricia/HalfPath DB is deprecated, support will be removed when Nethermind removes support for it. `./ethd update` will warn you; you can switch to a Flat   DB via `./ethd migrate-nethermind`
+- Nethermind's legacy `nm-eth1-data` volume is deprecated, support will be removed when Nethermind removes support for its Patricia/HalfPath DB. `./ethd update` will warn you; you can switch to a supported volume and Flat DB via `./ethd resync-execution`
+- The consensus layer client TCP transport port is deprecated. Make sure to port-forward its UDP QUIC transport port and UDP discovery port. Use `./ethd port-check` to get an      overview. Support will be removed when the clients remove it, expected sometime Q1 2027
+- `mev-boost.yml` and `commit-boost-pbs.yml` will be removed from your configuration after Glamsterdam hardfork on mainnet, expected December 2026. You can seek them manually if   you still want them post-Glamsterdam. Clients have implemented ePBS support. `./ethd update` will warn you
+
+**Warning**
+- Nethermind has changed the on-disk structure of the receipts index. If you are running Nethermind with an `EL_EXTRAS=LogIndex.Enabled true` parameter in `.env`, expect 1-2 hours of reduced performance after updating Nethermind, while it rebuilds the index.
+
+**Breaking changes**
+- If using ePBS parameters with Teku, require Teku `26.11.0` or later.
+- Source-build for Reth requires Reth `v1.9` or later
+
+Changes
+- Teku ePBS parameters are GA and no longer use `--X`
+- Use LLVM 23 for Reth source build, for Reth 1.9 or later
+- Update Lido oracle list for mainnet. Thanks to @cnupy!
+- Use new Prysm Grafana Dashboard URL. Thanks to @b0a7!
+- Lodestar source build installs Zig, so Lodestar 2.0 can build. Thanks to @nflaig!
+- Change default build target for ethlambda source build
+
+Bug fixes
+- ethdo script now correctly warns when no CLs are reachable. Thanks to @Amadeus-22!
+- Ditto for (deprecated) Lighthouse validator exit script
+
 ## v26.11.0 2026-11-01
 
 *This is an optional release*
@@ -30,8 +66,8 @@ After that you can safely run `./ethd update`
 - The legacy `validator-exit` service for Lighthouse, Lodestar, Nimbus, Prysm and Teku is deprecated and support will be removed after Hegotá hardfork. Please switch your tooling to use `./ethd keys sign-exit` and `./ethd keys send-exit` instead
 - Nethermind's legacy Patricia/HalfPath DB is deprecated, support will be removed when Nethermind removes support for it. `./ethd update` will warn you; you can switch to a Flat DB via `./ethd migrate-nethermind`
 - Nethermind's legacy `nm-eth1-data` volume is deprecated, support will be removed when Nethermind removes support for its Patricia/HalfPath DB. `./ethd update` will warn you; you can switch to a supported volume and Flat DB via `./ethd resync-execution`
-- The consensus layer client TCP transport port is deprecated. Make sure to port-forward its UDP QUIC transport port and UDP discovery port. Use `./ethd port-check` to    get an overview. Support will be removed when the clients remove it, expected sometime Q1 2027
-- `mev-boost.yml` and `commit-boost-pbs.yml` will be removed from your configuration after Glamsterdam hardfork on mainnet, expected December 2026. You can seek them    manually if you still want them post-Glamsterdam. Clients are implementing ePBS support, which Eth Docker will support as they do. `./ethd update` will warn you
+- The consensus layer client TCP transport port is deprecated. Make sure to port-forward its UDP QUIC transport port and UDP discovery port. Use `./ethd port-check` to get an overview. Support will be removed when the clients remove it, expected sometime Q1 2027
+- `mev-boost.yml` and `commit-boost-pbs.yml` will be removed from your configuration after Glamsterdam hardfork on mainnet, expected December 2026. You can seek them manually if you still want them post-Glamsterdam. Clients are implementing ePBS support, which Eth Docker will support as they do. `./ethd update` will warn you
 
 Changes
 - Work around a Nimbus Hoodi sync issue
@@ -71,7 +107,7 @@ After that you can safely run `./ethd update`
 - The legacy `validator-exit` service for Lighthouse, Lodestar, Nimbus, Prysm and Teku is deprecated and support will be removed after Hegotá hardfork. Please switch your tooling to use `./ethd keys sign-exit` and `./ethd keys send-exit` instead
 - Nethermind's legacy Patricia/HalfPath DB is deprecated, support will be removed when Nethermind removes support for it. `./ethd update` will warn you; you can switch to a Flat DB via `./ethd migrate-nethermind`
 - Nethermind's legacy `nm-eth1-data` volume is deprecated, support will be removed when Nethermind removes support for its Patricia/HalfPath DB. `./ethd update` will warn you; you can switch to a supported volume and Flat DB via `./ethd resync-execution`
-- The consensus layer client TCP transport port is deprecated. Make sure to port-forward its UDP QUIC transport port and UDP discovery port. Use `./ethd port-check` to    get an overview. Support will be removed when the clients remove it, expected sometime Q1 2027
+- The consensus layer client TCP transport port is deprecated. Make sure to port-forward its UDP QUIC transport port and UDP discovery port. Use `./ethd port-check` to get an overview. Support will be removed when the clients remove it, expected sometime Q1 2027
 - `mev-boost.yml` and `commit-boost-pbs.yml` will be removed from your configuration after Glamsterdam hardfork on mainnet, expected December 2026. You can seek them manually if you still want them post-Glamsterdam. Clients are implementing ePBS support, which Eth Docker will support as they do. `./ethd update` will warn you
 
 **Breaking changes**
@@ -123,11 +159,9 @@ To fix this manually, `cd ~/eth-docker` or into the directory where you have Eth
 After that you can safely run `./ethd update`
 
 **Deprecations**
-- The legacy `validator-exit` service for Lighthouse, Lodestar, Nimbus, Prysm and Teku is deprecated and support will be removed after Hegotá hardfork. Please switch
-your tooling to use `./ethd keys sign-exit` and `./ethd keys send-exit` instead
+- The legacy `validator-exit` service for Lighthouse, Lodestar, Nimbus, Prysm and Teku is deprecated and support will be removed after Hegotá hardfork. Please switch your tooling to use `./ethd keys sign-exit` and `./ethd keys send-exit` instead
 - Nethermind's legacy Patricia/HalfPath DB is deprecated, support will be removed when Nethermind removes support for it. `./ethd update` will warn you; you can switch to a Flat DB via `./ethd resync-execution`
-- Nethermind's legacy `nm-eth1-data` volume is deprecated, support will be removed when Nethermind removes support for its Patricia/HalfPath DB. `./ethd update` will
-warn you; you can switch to a supported volume and Flat DB via `./ethd resync-execution`
+- Nethermind's legacy `nm-eth1-data` volume is deprecated, support will be removed when Nethermind removes support for its Patricia/HalfPath DB. `./ethd update` will warn you; you can switch to a supported volume and Flat DB via `./ethd resync-execution`
 - The consensus layer client TCP transport port is deprecated. Make sure to port-forward its UDP QUIC transport port and UDP discovery port. Use `./ethd port-check` to get an overview. Support will be removed when the clients remove it, expected sometime Q1 2027
 - `mev-boost.yml` and `commit-boost-pbs.yml` will be removed after Glamsterdam hardfork on mainnet, expected December 2026. Clients are implementing ePBS support, which Eth Docker will support as they do. `./ethd update` will warn you
 
@@ -1686,7 +1720,7 @@ and may not have firewall rules in place to trusted source IPs.
 
 *This is a required release for users of Teku, and optional for all others*
 
-- Fix Teku keymanager API cert. Thanks to @alepacheco for raising the issue!
+- Fix Teku keymanager API cert.
 
 ## v2.2.5 2022-12-08
 
