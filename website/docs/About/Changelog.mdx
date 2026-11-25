@@ -34,7 +34,7 @@ After that you can safely run `./ethd update`
 - `mev-boost.yml` and `commit-boost-pbs.yml` will be removed from your configuration after Glamsterdam hardfork on mainnet, expected December 2026. You can seek them manually if   you still want them post-Glamsterdam. Clients have implemented ePBS support. `./ethd update` will warn you
 
 **Warning**
-- Nethermind has changed the on-disk structure of the receipts index. If you are running Nethermind with an `EL_EXTRAS=LogIndex.Enabled true` parameter in `.env`, expect 1-2 hours of reduced performance after updating Nethermind, while it rebuilds the index.
+- Nethermind `2.3.0` will change the on-disk structure of the receipts index. If you are running Nethermind with an `EL_EXTRAS=LogIndex.Enabled true` parameter in `.env`, expect 1-2 hours of reduced performance after updating Nethermind, while it rebuilds the index.
 
 **Breaking changes**
 - If using ePBS parameters with Teku, require Teku `26.11.0` or later.
