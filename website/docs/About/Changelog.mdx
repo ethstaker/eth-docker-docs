@@ -39,6 +39,7 @@ After that you can safely run `./ethd update`
 **Breaking changes**
 - If using ePBS parameters with Teku, require Teku `26.11.0` or later.
 - Source-build for Reth requires Reth `v1.9` or later
+- Source-build for Nethermind requires Nethermind `v2.3.0` or later
 
 Changes
 - Teku ePBS parameters are GA and no longer use `--X`
@@ -47,6 +48,7 @@ Changes
 - Use new Prysm Grafana Dashboard URL. Thanks to @b0a7!
 - Lodestar source build installs Zig, so Lodestar 2.0 can build. Thanks to @nflaig!
 - Change default build target for ethlambda source build
+- Use NET11 when source-building Nethermind
 
 Bug fixes
 - ethdo script now correctly warns when no CLs are reachable. Thanks to @Amadeus-22!
